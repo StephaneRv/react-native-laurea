@@ -9,9 +9,6 @@ import {
 } from "react-native";
 import axios from "axios";
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +27,7 @@ export default function LoginScreen({ navigation }) {
       // console.log(response);
 			setAnswer(response.data)
 			navigation.navigate('Home')
-    }).catch(err => {
+    }).catch(err => { // Handle errors if backend is not running
         setAnswer("User not found")
     });
   }

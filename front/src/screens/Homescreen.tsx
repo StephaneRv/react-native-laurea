@@ -5,10 +5,6 @@ import {
   View,
   Image,
 } from "react-native";
-import axios from "axios";
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function HomeScreen({ navigation }) {
 
