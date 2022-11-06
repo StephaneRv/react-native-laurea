@@ -6,8 +6,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import TrendingVideos from "../components/TrendingVids";
 
+import YOUTUBE_API_KEY from "../../env";
+
 const MAX_RESULT = 5;
-const YOUTUBE_API_KEY = "AIzaSyBhgiib4HQtOJ1fm27RwveOzYaGqZoNtOo"
 
 export default function Home() {
 
