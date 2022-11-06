@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,6 +9,7 @@ import LoginScreen from './src/screens/Login';
 import RegisterScreen from './src/screens/Register';
 import TabsScreen from './src/screens/Tabs';
 import ResetPasswordScreen from './src/screens/ForgotPasswd';
+import VideoViewer from './src/components/VideoViewer';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -49,6 +50,7 @@ export default function App() {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="Forgot Password" component={ResetPasswordScreen} />
+          <Stack.Screen name = "VideoViewer" component={VideoViewer} options={{headerShown: true}}/>
         </Stack.Navigator>
         <View onLayout={onLayoutRootView}>
         </View>

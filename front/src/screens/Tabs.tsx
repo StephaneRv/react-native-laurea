@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import AboutScreen from "../tabs/About";
-import HomeScreen from "../tabs/Home";
+import Search from "../tabs/Search";
+import TrendingVideos from '../components/TrendingVids';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,14 +16,14 @@ export default function TabsScreen({ navigation }) {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === 'Home') {
+            if (route.name === 'Trends') {
               iconName = focused
                 ? 'planet'
                 : 'planet-outline';
-            } else if (route.name === 'About') {
+            } else if (route.name === 'Search') {
               iconName = focused
-                ? 'infinite'
-                : 'infinite-outline';
+                ? 'search'
+                : 'search-outline';
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -32,8 +33,8 @@ export default function TabsScreen({ navigation }) {
         })
       }
       >
-        <Tab.Screen name="Home" component={HomeScreen}/>
-        <Tab.Screen name="About" component={AboutScreen} />
+        <Tab.Screen name="Trends" component={TrendingVideos} />
+        <Tab.Screen name="Search" component={Search}/>
       </Tab.Navigator>
   );
 }

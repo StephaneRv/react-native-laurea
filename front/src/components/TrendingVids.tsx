@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Text, SafeAreaView, ScrollView, View, TouchableOpacity } from "react-native";
 import { VideoThumbnail, VideoTitle } from "./VideoUtils";
+import { useNavigation } from '@react-navigation/native'
+
 import YOUTUBE_API_KEY from "../../env";
 
-const MAX_RESULT = 5;
+const MAX_RESULT = 10;
 
 export default function TrendingVideos() {
   const [videos, setVideos] = useState([]);
@@ -11,6 +13,8 @@ export default function TrendingVideos() {
   const [thumbnails, setThumbnails] = useState([""]);
 
   const [loading, setLoading] = useState(true);
+
+	const navigation = useNavigation();
 
   useEffect(() => {
     fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=${MAX_RESULT}&key=${YOUTUBE_API_KEY}`)
@@ -30,11 +34,6 @@ export default function TrendingVideos() {
       .catch(err => console.log(err));
   }, []);
 
-	const displayVideo = (videoId: string) => {
-		console.log("video id:", videoId);
-		// console.log("UWUUUUUUU")
-	}
-
   return (
     <SafeAreaView>
       <ScrollView>
@@ -45,14 +44,13 @@ export default function TrendingVideos() {
             return (
 							<View key={index}>
                 <VideoTitle>{titles[index]}</VideoTitle>
-								<TouchableOpacity onPress={() => displayVideo(video.id)}>
+								<TouchableOpacity onPress={() => navigation.navigate("VideoViewer", {videoUri: video.id})}>
 	                <VideoThumbnail source={{ uri: thumbnails[index] }}/>
 								</TouchableOpacity>
 							</View>
 						)
           }
         )}
-
       </ScrollView>
     </SafeAreaView>
   );
