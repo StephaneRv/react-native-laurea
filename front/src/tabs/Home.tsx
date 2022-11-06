@@ -4,41 +4,10 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import styled from 'styled-components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const MAX_RESULT = 10;
-const YOUTUBE_API_KEY = "AIzaSyALldE5tAHa0Qi6dJbAWgpHZQc1gnQPFy8"
+import TrendingVideos from "../components/TrendingVids";
 
-function TrendingVideos() {
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=${MAX_RESULT}&key=${YOUTUBE_API_KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        setVideos(data.items);
-        setLoading(false);
-      })
-  }, []);
-
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : (
-          videos.map((video, index) => (
-            <YoutubePlayer
-              key={index}
-              height={270}
-              play={false}
-              videoId={video.id}
-            />
-          ))
-        )}
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+const MAX_RESULT = 5;
+const YOUTUBE_API_KEY = "AIzaSyBhgiib4HQtOJ1fm27RwveOzYaGqZoNtOo"
 
 export default function Home() {
 
@@ -60,6 +29,7 @@ export default function Home() {
               fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${MAX_RESULT}&q=${videoTitle}&key=${YOUTUBE_API_KEY}`)
                 .then(response => response.json())
                 .then(data => {
+                  console.log(data);
                   setVideoIds(data.items.map(item => item.id.videoId));
                 })
                 .catch(error => {
