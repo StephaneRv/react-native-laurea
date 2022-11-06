@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 
+
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -24,9 +25,8 @@ export default function LoginScreen({ navigation }) {
       password: password
     })
     .then((response) => {
-      // console.log(response);
 			setAnswer(response.data)
-			navigation.navigate('Home')
+			navigation.replace('Tabs')
     }).catch(err => { // Handle errors if backend is not running
         setAnswer("User not found")
     });
@@ -62,7 +62,7 @@ export default function LoginScreen({ navigation }) {
 			<TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Register')}>
         <Text style={styles.forgot_button}>Don't have an account? Create one</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('ForgotPassword')}>
+      <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Forgot Password')}>
         <Text style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
 			{/* <Text>{answer ? answer : ""}</Text> */}

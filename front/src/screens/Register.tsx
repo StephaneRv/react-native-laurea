@@ -31,7 +31,7 @@ export default function RegisterScreen({ navigation }) {
     .then((response) => {
       // console.log(response);
       if (response.status === 201) {
-			  navigation.navigate('Home')
+			  navigation.replace('Tabs')
         setSuccess(true);
       } else {
         setSuccess(false);

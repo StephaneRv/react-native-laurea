@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,7 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LoginScreen from './src/screens/Login';
 import RegisterScreen from './src/screens/Register';
-import HomeScreen from './src/screens/Homescreen';
+import TabsScreen from './src/screens/Tabs';
 import ResetPasswordScreen from './src/screens/ForgotPasswd';
 
 SplashScreen.preventAutoHideAsync();
@@ -20,7 +20,7 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 0));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -42,15 +42,17 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="ForgotPassword" component={ResetPasswordScreen} />
-      </Stack.Navigator>
-      <View onLayout={onLayoutRootView}>
-      </View>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Tabs" component={TabsScreen} options={{headerShown: false}} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="Forgot Password" component={ResetPasswordScreen} />
+        </Stack.Navigator>
+        <View onLayout={onLayoutRootView}>
+        </View>
+      </NavigationContainer>
+    </>
   );
 }
