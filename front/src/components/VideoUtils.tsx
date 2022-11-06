@@ -9,7 +9,8 @@ const VideoThumbnail = styled.Image`
 const VideoTitle = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  margin: 10px 10px;
+  margin: 0px 10px;
+  padding-bottom: 10px;
 `;
 
 const VideoChannel = styled.Text`
@@ -17,4 +18,17 @@ const VideoChannel = styled.Text`
   color: #999;
 `;
 
-export { VideoThumbnail, VideoTitle, VideoChannel };
+const VideoAuthor = styled.Text`
+	font-size: 13px;
+	color: #555;
+	margin: 10px 10px;
+`;
+
+const VideoDescription = styled.Text`
+	font-size: 12px;
+	color: #999;
+	margin: 10px 10px;
+`;
+
+
+export { VideoThumbnail, VideoTitle, VideoChannel, VideoDescription, VideoAuthor };

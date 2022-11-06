@@ -14,7 +14,7 @@ export default function Search() {
 
   const [query, setQuery] = useState();
   const [searched, setSearched] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [videos, setVideos] = useState([]);
   const [titles, setTitles] = useState([""]);
@@ -45,6 +45,7 @@ export default function Search() {
                 setTitles(titles);
                 setThumbnails(thumbnails);
                 setSearched(true);
+                setLoading(false);
               })
               .catch(err => console.log(err));
             }}
@@ -58,10 +59,15 @@ export default function Search() {
               : videos.map((video: any, index) => {
                 return (
                   <View key={index}>
-                    <VideoTitle>{titles[index]}</VideoTitle>
-                    <TouchableOpacity onPress={() => navigation.navigate("VideoViewer", {videoUri: video.id.videoId})}>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("VideoViewer", {
+                        video: video,
+                        isFromSearchTab: true
+                      })
+                    }>
                       <VideoThumbnail source={{ uri: thumbnails[index] }}/>
                     </TouchableOpacity>
+                    <VideoTitle>{titles[index]}</VideoTitle>
                   </View>
                 )
               }

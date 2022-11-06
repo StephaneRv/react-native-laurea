@@ -24,6 +24,7 @@ export default function TrendingVideos() {
         let titles = [];
         let thumbnails = [];
         for (let i = 0; i < data.items.length; i++) {
+					// console.log("SUUUU: ", data.items[i]);
           titles.push(data.items[i].snippet.title);
           thumbnails.push(`http://img.youtube.com/vi/${data.items[i].id}/hqdefault.jpg`)
         }
@@ -43,10 +44,15 @@ export default function TrendingVideos() {
           videos.map((video: any, index) => {
             return (
 							<View key={index}>
-                <VideoTitle>{titles[index]}</VideoTitle>
-								<TouchableOpacity onPress={() => navigation.navigate("VideoViewer", {videoUri: video.id})}>
+								<TouchableOpacity
+										onPress={() => navigation.navigate("VideoViewer", {
+											video: video,
+											isFromSearchTab: false
+										})
+									}>
 	                <VideoThumbnail source={{ uri: thumbnails[index] }}/>
 								</TouchableOpacity>
+								<VideoTitle>{titles[index]}</VideoTitle>
 							</View>
 						)
           }

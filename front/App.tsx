@@ -46,11 +46,11 @@ export default function App() {
     <>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Tabs" component={TabsScreen} options={{headerShown: false}} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="Tabs" component={TabsScreen} options={{headerShown: false}} />
           <Stack.Screen name="Forgot Password" component={ResetPasswordScreen} />
-          <Stack.Screen name = "VideoViewer" component={VideoViewer} options={{headerShown: true}}/>
+          <Stack.Screen name = "VideoViewer" component={VideoViewer} options={{title: ""}}/>
         </Stack.Navigator>
         <View onLayout={onLayoutRootView}>
         </View>
