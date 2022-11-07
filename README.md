@@ -8,6 +8,6 @@ If you want to try this app by yourself, you'll need to reprorduce two mandatory
 
 To run the back and the front (as the app is not dockerized yet):
 
-- Open two terminals, go to the `front` folder and run `npm i`, then `npx expo start`, then use your second terminal to go to the `back` folder and simply run `node dbServer.js`, note that you will need a `.env` file inside of this folder that will contain these  environment variables `DB_HOST` `DB_USER` `DB_PASSWORD` `DB_DATABASE` `DB_PORT`.
+- Open two terminals, go to the `front` folder, run `npm i`, then `npx expo start`. Use your second terminal to go to the `back` folder and simply run `node dbServer.js`, note that you will need a `.env` file inside of this folder that will contain these  environment variables `DB_HOST` `DB_USER` `DB_PASSWORD` `DB_DATABASE` `DB_PORT`.
 
 Please feel free to send me a DM if you encounter issues while trying to run the project.
