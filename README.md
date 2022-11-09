@@ -1,4 +1,4 @@
-Laurea University of Applied Sciences - Deploy and Build React-Native Apps
+YouTube Like App
 
 If you want to try this app by yourself, you'll need to reprorduce two mandatory steps:
 
