@@ -20,8 +20,10 @@ export default function LoginScreen({ navigation }) {
       alert("Please fill in all fields");
       return;
     }
-    axios.post("http://localhost:3000/login", {
-      username: username,
+
+    //Add your computer's internal IPv4 address here
+    axios.post("http://192.168.1.206:3000/login", {
+      user: username,
       password: password
     })
     .then((response) => {

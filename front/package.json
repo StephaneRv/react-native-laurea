@@ -39,7 +39,9 @@
     "react-native-webview": "11.23.0",
     "react-native-youtube-iframe": "^2.2.2",
     "react-navigation": "^4.4.4",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "undefined": "@expo/webpack-config^0.17.0",
+    "@expo/webpack-config": "^0.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

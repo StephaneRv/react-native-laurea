@@ -24,6 +24,11 @@
         "image": "./assets/images/splash.png",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
+      },
+      "infoPlist": {
+        "NSAppTransportSecurity" : {
+          "NSAllowsArbitraryLoads" : true
+        }
       }
     },
     "android": {

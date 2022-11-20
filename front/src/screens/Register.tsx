@@ -24,8 +24,10 @@ export default function RegisterScreen({ navigation }) {
       alert("Passwords do not match");
       return;
     }
-    axios.post("http://localhost:3000/register", {
-      username: username,
+
+     //Add your computer's internal IPv4 address here
+    axios.post("http://192.168.1.206:3000/register", {
+      user: username,
       password: password
     })
     .then((response) => {
