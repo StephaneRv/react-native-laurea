@@ -6,6 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AboutScreen from "../tabs/About";
 import Search from "../tabs/Search";
 import TrendingVideos from '../components/TrendingVids';
+import Account from '../components/Account';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,16 +19,21 @@ export default function TabsScreen({ navigation }) {
 
             if (route.name === 'Trends') {
               iconName = focused
-                ? 'planet'
-                : 'planet-outline';
+                ? 'home'
+                : 'home-outline';
             } else if (route.name === 'Search') {
               iconName = focused
                 ? 'search'
                 : 'search-outline';
+            } else if (route.name === 'Account') {
+              iconName = focused
+                ? 'person'
+                : 'person-outline';
             }
+
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: '#6A38A9',
+          tabBarActiveTintColor: '#0d253f',
           tabBarInactiveTintColor: 'gray',
           headerShown: false
         })
@@ -35,6 +41,7 @@ export default function TabsScreen({ navigation }) {
       >
         <Tab.Screen name="Trends" component={TrendingVideos} />
         <Tab.Screen name="Search" component={Search}/>
+        <Tab.Screen name="Account" component={Account}/>
       </Tab.Navigator>
   );
 }
