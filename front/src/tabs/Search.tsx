@@ -28,7 +28,8 @@ export default function Search() {
         <SearchContainer>
           <Ionicons name="search" size={20} color="#000" />
           <SearchInput
-            placeholder="Search video"
+            placeholder="Search movies, tv, or people here"
+            placeholderTextColor="#bbc9bf"
             onChangeText={setQuery}
             value={query}
             onSubmitEditing={() => {
@@ -91,3 +92,4 @@ const SearchInput = styled.TextInput`
   padding: 2px;
   margin: 12px;
 `;
+

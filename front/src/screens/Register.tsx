@@ -49,7 +49,10 @@ export default function RegisterScreen({ navigation }) {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            placeholder="Email"
+            autoCorrect={false}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            placeholder="Email Address"
             placeholderTextColor="#bbc9bf"
             onChangeText={(username) => setUsername(username)}
           />
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
   TextInput: {
     height: 50,
     flex: 1,
-    padding: 10,
+    padding: 5,
     // marginLeft: 20,
   },
 

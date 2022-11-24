@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   TextInput: {
     height: 50,
     flex: 1,
-    padding: 10,
+    padding: 5,
     // marginLeft: 20,
   },
 

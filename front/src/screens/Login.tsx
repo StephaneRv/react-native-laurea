@@ -42,6 +42,9 @@ export default function LoginScreen({ navigation }) {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
+            autoCorrect={false}
+            autoCapitalize="none"
+            keyboardType="email-address"
             placeholder="Username"
             placeholderTextColor="#bbc9bf"
             onChangeText={(username) => setUsername(username)}
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
   TextInput: {
     height: 50,
     flex: 1,
-    padding: 10,
+    padding: 5,
     // marginLeft: 20,
   },
 
