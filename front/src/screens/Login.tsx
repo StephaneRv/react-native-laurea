@@ -6,6 +6,8 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import axios from "axios";
 
@@ -35,47 +37,47 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.logo} source={require("../../assets/images/full.png")} />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <Image style={styles.logo} source={require("../../assets/images/full.png")} />
 
-      <View style={styles.loginContainer}>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            autoCorrect={false}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            placeholder="Username"
-            placeholderTextColor="#bbc9bf"
-            onChangeText={(username) => setUsername(username)}
-          />
+        <View style={styles.loginContainer}>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              autoCorrect={false}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              placeholder="Username"
+              placeholderTextColor="#bbc9bf"
+              onChangeText={(username) => setUsername(username)}
+            />
+          </View>
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(password) => setPassword(password)}
+            />
+          </View>
+
+          <TouchableOpacity style={styles.loginBtn} onPress={ () => LoginUser()}>
+            <Text style={styles.loginText}>Login</Text>
+          </TouchableOpacity>
+
+			    <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.forgot_button}>Don't have an account? Create one</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Forgot Password')}>
+            <Text style={styles.forgot_button}>Forgot Password?</Text>
+          </TouchableOpacity>
+			      {/* <Text>{answer ? answer : ""}</Text> */}
         </View>
-
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Password"
-            placeholderTextColor="#bbc9bf"
-            secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
-          />
-        </View>
-
-        <TouchableOpacity style={styles.loginBtn} onPress={ () => LoginUser()}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
-
-			  <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.forgot_button}>Don't have an account? Create one</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Forgot Password')}>
-          <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
-			  {/* <Text>{answer ? answer : ""}</Text> */}
-        
       </View>
-      {/* Might add TMDB About text here according to their guidlines, depending on an About page. */}
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 

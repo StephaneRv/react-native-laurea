@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   StyleSheet,
   Text,
@@ -6,7 +7,10 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
+
 import axios from "axios";
 
 export default function RegisterScreen({ navigation }) {
@@ -42,52 +46,54 @@ export default function RegisterScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.logo} source={require("../../assets/images/full.png")} />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <Image style={styles.logo} source={require("../../assets/images/full.png")} />
 
-      <View style={styles.loginContainer}>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            autoCorrect={false}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            placeholder="Email Address"
-            placeholderTextColor="#bbc9bf"
-            onChangeText={(username) => setUsername(username)}
-          />
+        <View style={styles.loginContainer}>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              autoCorrect={false}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              placeholder="Email Address"
+              placeholderTextColor="#bbc9bf"
+              onChangeText={(username) => setUsername(username)}
+            />
+          </View>
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(password) => setPassword(password)}
+            />
+          </View>
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Confirm Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
+            />
+          </View>
+
+          <TouchableOpacity style={styles.registerBtn} onPress={ () => CreateUser()}>
+            <Text style={styles.registerText}>Register</Text>
+          </TouchableOpacity>
+
+			    <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.forgot_button}>Already have an account? Login</Text>
+          </TouchableOpacity>
+            {/* <Text>{success ? "Account created successfully" : ""}</Text> */}
         </View>
-
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Password"
-            placeholderTextColor="#bbc9bf"
-            secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
-          />
-        </View>
-
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Confirm Password"
-            placeholderTextColor="#bbc9bf"
-            secureTextEntry={true}
-            onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-          />
-        </View>
-
-        <TouchableOpacity style={styles.registerBtn} onPress={ () => CreateUser()}>
-          <Text style={styles.registerText}>Register</Text>
-        </TouchableOpacity>
-
-			  <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.forgot_button}>Already have an account? Login</Text>
-        </TouchableOpacity>
-          {/* <Text>{success ? "Account created successfully" : ""}</Text> */}
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 

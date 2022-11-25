@@ -5,12 +5,15 @@ import {
   View,
   Image,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 export default function ResetPasswordScreen({ navigation }) {
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/images/short.png")} />
       <Text>The reset password feature is not implemented yet.</Text>
@@ -36,6 +39,7 @@ export default function ResetPasswordScreen({ navigation }) {
         </TouchableOpacity>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
