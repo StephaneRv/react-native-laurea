@@ -78,7 +78,7 @@ They should now look like the following:
 #### Note!
 The port you’re using for the backend server might be different. The default is generally port 3000. Adjust the `back/.env` accordingly, more on that below.
 
-### Running the App
+## Running the App
 To run the back and the front for a fully-functioning app (as the app is not dockerized yet):
 
 1. Open two terminals.
@@ -88,5 +88,7 @@ To run the back and the front for a fully-functioning app (as the app is not doc
 3. Use your second terminal to go to the back folder, run `npm i` as well and type `node dbServer.js`  or `nodemon dbServer` to start the server. Note the port the server’s running on, if it’s something other than 3000, adjust the addresses while setting up the Frontend, and the .env setup in the Backend accordingly. 
 
 4. Scan the QR code in the terminal with your mobile device to launch Expo Go. The application will build itself and launch. (Alternatively you should be able to launch Expo Go, and find the application ready and waiting for launch. You may have to create a free account.)
+
+5. When you’re done with the application, you can stop the terminal processes with a ctrl-c in each terminal window. Remember to stop the MySQL Server when you’re not using it.
 
 5. Please feel free to send us a DM if you encounter issues while trying to run the project.
