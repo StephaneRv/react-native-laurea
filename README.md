@@ -11,7 +11,7 @@ The MovieDB App is made for the Introduction to Mobile Application Development c
 The MovieDB allows the user to browse trending movies, as well as search for films, TV shows, and cast and crew, with the ability to tap through for more information on each result. The information supplied depends on what’s in TMDB. The user can register, login and logout, reset the password, and send a request for a new password. The application also offers account information and an about screen for more information. 
 
 ### Under the Hood
-The MovieDB app is made with React Native and NodeJS, built with Expo. It features a simple SQL database for user login, with hashed passwords that would secure user data in a real-world scenario. The keyboard type should also change depending on the type of text entry, and can be dismissed by tapping outside the text area.
+The MovieDB app is made with React Native and NodeJS, built with Expo. It features a simple SQL database to demonstrate user login, with hashed passwords that would secure user data in a real-world scenario. The keyboard type should also change depending on the type of text entry, and can be dismissed by tapping outside the text area.
 
 ## Instructions
 If you want to try this app by yourself, you'll need to follow these steps. The following assumes you have both Node and Expo installed already, but if you don’t, then follow the directions found at the following links:
@@ -87,4 +87,6 @@ To run the back and the front for a fully-functioning app (as the app is not doc
 
 3. Use your second terminal to go to the back folder, run `npm i` as well and type `node dbServer.js`  or `nodemon dbServer` to start the server. Note the port the server’s running on, if it’s something other than 3000, adjust the addresses while setting up the Frontend, and the .env setup in the Backend accordingly. 
 
-4. Please feel free to send us a DM if you encounter issues while trying to run the project.
+4. Scan the QR code in the terminal with your mobile device to launch Expo Go. The application will build itself and launch. (Alternatively you should be able to launch Expo Go, and find the application ready and waiting for launch. You may have to create a free account.)
+
+5. Please feel free to send us a DM if you encounter issues while trying to run the project.
