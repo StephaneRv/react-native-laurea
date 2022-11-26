@@ -31,7 +31,7 @@ If you want to try this app by yourself, you'll need to follow these steps. The 
 
 2. Once your MySQL server is running, open MySQL Workbench, and run the schema found in the /database folder. This will create our userDB. You can close Workbench now if you wish, but it’s recommended to setup your userDB username and password here. (See the note at the end of this section for a tutorial that can help with that.)
 
-3. Create a .env file in the /back folder that will contain these environment variables `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_DATABASE`, and `DB_PORT`. These variables will be used to store the values that you set-up when you installed your database.
+3. Create a `.env` file in the /back folder that will contain these environment variables `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_DATABASE`, and `DB_PORT`. These variables will be used to store the values that you set-up when you installed your database.
 
 The `/back/.env` file should look like the following: 
 	
@@ -46,12 +46,12 @@ PORT = 3000
 
 4. Create a `.gitignore` in the `/back` folder, so that your personal database settings aren’t shared with the internet on Github. 
 
-It should look like this, if creating from scratch. If it already exists, just make sure the `.env` is there::
+It should look like this, if creating from scratch. If it already exists, just make sure the `.env` is there:
 	
 ```
-	.gitignore
-			# Env
-			.env
+.gitignore
+	# Env
+	.env
 ```
 
 #### Note! 
