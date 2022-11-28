@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, SafeAreaView, ScrollView, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, SafeAreaView, ScrollView, View, TouchableOpacity, Image } from "react-native";
 import { VideoThumbnail, VideoTitle } from "./VideoUtils";
 import { useNavigation } from '@react-navigation/native'
 
@@ -36,7 +36,9 @@ export default function TrendingVideos() {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
+        <Image style={styles.logo} source={require("../../assets/images/long.png")} />
+    
       <ScrollView>
         {loading ? (
           <Text>Loading...</Text>
@@ -61,3 +63,16 @@ export default function TrendingVideos() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+  },
+
+  logo: {
+		marginTop: 20,
+    marginBottom: 20,
+  },
+});
