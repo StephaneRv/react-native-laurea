@@ -37,7 +37,10 @@ export default function TrendingVideos() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.titleContainer}>
         <Image style={styles.logo} source={require("../../assets/images/long.png")} />
+        <Text style={styles.titleText}>Trending</Text>
+      </View>
     
       <ScrollView>
         {loading ? (
@@ -73,6 +76,27 @@ const styles = StyleSheet.create({
 
   logo: {
 		marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 5,
+    resizeMode: "contain",
+    height: 20,
+  },
+
+  titleContainer: {
+    width: "100%",
+    position: "relative",
+    backgroundColor: "#0d253f",
+    alignItems: "center",
+    shadowColor: "#01b4e4",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 10,
+    shadowOpacity: .74,
+  },
+
+  titleText: {
+    fontFamily: "Helvetica",
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "white",
+    paddingBottom: 15,
   },
 });

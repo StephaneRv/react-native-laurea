@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView, TouchableOpacity, View, Text } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View, Text, Image } from "react-native";
 import styled from 'styled-components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native'
@@ -25,6 +25,11 @@ export default function Search() {
   return (
     <>
       <SafeAreaView>
+        <View style={styles.titleContainer}>
+          <Image style={styles.logo} source={require("../../assets/images/long.png")} />
+          <Text style={styles.titleText}>Search</Text>
+        </View>
+
         <SearchContainer>
           <Ionicons name="search" size={20} color="#000" />
           <SearchInput
@@ -93,3 +98,36 @@ const SearchInput = styled.TextInput`
   margin: 12px;
 `;
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+  },
+
+  logo: {
+		marginTop: 20,
+    marginBottom: 5,
+    resizeMode: "contain",
+    height: 20,
+  },
+
+  titleContainer: {
+    width: "100%",
+    position: "relative",
+    backgroundColor: "#0d253f",
+    alignItems: "center",
+    shadowColor: "#01b4e4",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 10,
+    shadowOpacity: .74,
+  },
+
+  titleText: {
+    fontFamily: "Helvetica",
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "white",
+    paddingBottom: 15,
+  },
+});
