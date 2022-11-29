@@ -4,7 +4,7 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import styled from 'styled-components';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { VideoAuthor, VideoTitle, VideoDescription } from "../components/VideoUtils";
+import { VideoAuthor, VideoTitle, VideoDescription } from "./VideoUtils";
 
 // import YOUTUBE_API_KEY from "../../env";
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, SafeAreaView, ScrollView, View, TouchableOpacity, Image } from "react-native";
-import { VideoThumbnail, VideoTitle } from "./VideoUtils";
+import { StyleSheet, Text, SafeAreaView, ScrollView, View, TouchableOpacity, Image, Appearance } from "react-native";
+import { VideoThumbnail, VideoTitle } from "../components/VideoUtils";
 import { useNavigation } from '@react-navigation/native'
 
 import YOUTUBE_API_KEY from "../../env";
@@ -15,6 +15,8 @@ export default function TrendingVideos() {
   const [loading, setLoading] = useState(true);
 
 	const navigation = useNavigation();
+
+  const colorScheme = Appearance.getColorScheme();
 
   useEffect(() => {
     fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=${MAX_RESULT}&key=${YOUTUBE_API_KEY}`)
@@ -36,7 +38,7 @@ export default function TrendingVideos() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={colorScheme == 'light' ? styles.container : styles.container_dark}>
       <View style={styles.titleContainer}>
         <Image style={styles.logo} source={require("../../assets/images/long.png")} />
         <Text style={styles.titleText}>Trending</Text>
@@ -57,7 +59,7 @@ export default function TrendingVideos() {
 									}>
 	                <VideoThumbnail source={{ uri: thumbnails[index] }}/>
 								</TouchableOpacity>
-								<VideoTitle>{titles[index]}</VideoTitle>
+								<VideoTitle style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>{titles[index]}</VideoTitle>
 							</View>
 						)
           }
@@ -71,6 +73,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    alignItems: "center",
+  },
+
+  container_dark: {
+    backgroundColor: "#0d253f",
+    flex: 1,
     alignItems: "center",
   },
 
@@ -99,4 +107,14 @@ const styles = StyleSheet.create({
     color: "white",
     paddingBottom: 15,
   },
+
+  text_light: {
+    marginBottom: 20,
+    color: '#000'
+  },
+
+  text_dark: {
+    marginBottom: 20,
+    color: "#fff"
+  }
 });

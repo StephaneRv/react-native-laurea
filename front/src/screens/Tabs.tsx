@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import AboutScreen from "../tabs/About";
+import AboutScreen from "../components/About";
 import Search from "../tabs/Search";
-import TrendingVideos from '../components/TrendingVids';
-import Account from '../components/Account';
+import TrendingVideos from '../tabs/TrendingVids';
+import Account from '../tabs/Account';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,9 +33,18 @@ export default function TabsScreen({ navigation }) {
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: '#0d253f',
-          tabBarInactiveTintColor: 'gray',
-          headerShown: false
+          tabBarActiveTintColor: '#90cea1',
+          tabBarInactiveTintColor: '#01b4e4',
+          headerShown: false,
+
+          tabBarStyle: {
+            backgroundColor: "#0d253f",
+
+          },
+
+          
+
+        
         })
       }
       >

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View, Text, Image } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View, Text, Image, Appearance } from "react-native";
 import styled from 'styled-components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native'
@@ -22,9 +22,11 @@ export default function Search() {
 
 	const navigation = useNavigation();
 
+  const colorScheme = Appearance.getColorScheme();
+
   return (
     <>
-      <SafeAreaView>
+      <SafeAreaView style={colorScheme == 'light' ? styles.container : styles.container_dark}>
         <View style={styles.titleContainer}>
           <Image style={styles.logo} source={require("../../assets/images/long.png")} />
           <Text style={styles.titleText}>Search</Text>
@@ -57,7 +59,7 @@ export default function Search() {
             }}
           />
         </SearchContainer>
-      </SafeAreaView>
+      
       <ScrollView>
           { searched ?
             ( loading ?
@@ -80,6 +82,7 @@ export default function Search() {
             )
           ) : null}
       </ScrollView>
+      </SafeAreaView>
     </>
   );
 }
@@ -102,6 +105,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    alignItems: "center",
+  },
+
+  container_dark: {
+    backgroundColor: "black",
+    flex: 1,
     alignItems: "center",
   },
 

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Appearance,
 } from "react-native";
 
 import axios from "axios";
@@ -45,9 +46,11 @@ export default function RegisterScreen({ navigation }) {
     });
   }
 
+  const colorScheme = Appearance.getColorScheme();
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
+      <View style={colorScheme == 'light' ? styles.container : styles.container_dark}>
         <Image style={styles.logo} source={require("../../assets/images/full.png")} />
 
         <View style={styles.loginContainer}>
@@ -101,6 +104,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    alignItems: "center",
+  },
+
+  container_dark: {
+    backgroundColor: "black",
+    flex: 1,
     alignItems: "center",
   },
 

@@ -8,15 +8,18 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Appearance,
 } from "react-native";
+
+const colorScheme = Appearance.getColorScheme();
 
 export default function ResetPasswordScreen({ navigation }) {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-    <View style={styles.container}>
+    <View style={colorScheme == 'light' ? styles.container : styles.container_dark}>
       <Image style={styles.logo} source={require("../../assets/images/short.png")} />
-      <Text>The reset password feature is not implemented yet.</Text>
+      <Text style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>The reset password feature is not implemented yet.</Text>
       <View style={styles.loginContainer}>
         <View style={styles.inputView}>
           <TextInput
@@ -47,6 +50,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    alignItems: "center",
+  },
+
+  container_dark: {
+    backgroundColor: "black",
+    flex: 1,
     alignItems: "center",
   },
 
@@ -105,5 +114,15 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
     color: "white",
 	},
+
+  text_light: {
+    marginBottom: 20,
+    color: '#000'
+  },
+
+  text_dark: {
+    marginBottom: 20,
+    color: "#fff"
+  }
 
 });

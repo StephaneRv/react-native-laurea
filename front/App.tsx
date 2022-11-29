@@ -11,6 +11,8 @@ import TabsScreen from './src/screens/Tabs';
 import ResetPasswordScreen from './src/screens/ForgotPasswd';
 import VideoViewer from './src/components/VideoViewer';
 import { BottomTabBarHeightCallbackContext } from '@react-navigation/bottom-tabs';
+import TrendingVideos from './src/tabs/TrendingVids';
+import Account from './src/tabs/Account';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -64,7 +66,9 @@ export default function App() {
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="Tabs" component={TabsScreen} options={{headerShown: false}} />
           <Stack.Screen name="Forgot Password" component={ResetPasswordScreen} />
-          <Stack.Screen name = "VideoViewer" component={VideoViewer} options={{title: ""}}/>
+          <Stack.Screen name="Account" component={Account} />
+          <Stack.Screen name ="VideoViewer" component={VideoViewer} options={{title: ""}}/>
+
         </Stack.Navigator>
         <View onLayout={onLayoutRootView} >
         </View>
