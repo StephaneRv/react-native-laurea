@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 
   container_dark: {
-    backgroundColor: "black",
+    backgroundColor: "#0d253f",
     flex: 1,
     alignItems: "center",
     fontStyle: "normal",

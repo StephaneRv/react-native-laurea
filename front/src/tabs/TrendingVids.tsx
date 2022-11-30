@@ -46,7 +46,7 @@ export default function TrendingVideos() {
     
       <ScrollView>
         {loading ? (
-          <Text>Loading...</Text>
+          <Text style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>Loading...</Text>
         ) :
           videos.map((video: any, index) => {
             return (
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     shadowColor: "#01b4e4",
     shadowOffset: {width: 2, height: 2},
-    shadowRadius: 10,
-    shadowOpacity: .74,
+    shadowRadius: 5,
+    shadowOpacity: .25,
   },
 
   titleText: {
@@ -110,11 +110,13 @@ const styles = StyleSheet.create({
 
   text_light: {
     marginBottom: 20,
-    color: '#000'
+    color: '#000',
+    textAlign: "center",
   },
 
   text_dark: {
     marginBottom: 20,
-    color: "#fff"
+    color: "#fff",
+    textAlign: "center",
   }
 });

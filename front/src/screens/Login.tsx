@@ -9,9 +9,10 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Appearance,
+  StatusBar,
+  SafeAreaView
 } from "react-native";
 import axios from "axios";
-
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -40,8 +41,12 @@ export default function LoginScreen({ navigation }) {
   const colorScheme = Appearance.getColorScheme();
 
   return (
+    <SafeAreaView style={colorScheme == 'light' ? styles.safe_lite : styles.safe_dark}>
+      <StatusBar barStyle={colorScheme == 'light' ? 'dark-content' : 'light-content'} />
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      
       <View style={colorScheme == 'light' ? styles.container : styles.container_dark}>
+      
         <Image style={styles.logo} source={require("../../assets/images/full.png")} />
 
         <View style={styles.loginContainer}>
@@ -81,19 +86,28 @@ export default function LoginScreen({ navigation }) {
         </View>
       </View>
     </TouchableWithoutFeedback>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safe_lite: {
+    backgroundColor: "#fff",
+  },
+
+  safe_dark: {
+    backgroundColor: "#0d253f",
+  },
+
   container: {
-    flex: 1,
+    height: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
   },
 
   container_dark: {
-    backgroundColor: "black",
-    flex: 1,
+    backgroundColor: "#0d253f",
+    height: "100%",
     alignItems: "center",
   },
 

@@ -63,7 +63,7 @@ export default function Search() {
       <ScrollView>
           { searched ?
             ( loading ?
-              <Text>Loading...</Text>
+              <Text style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>Loading...</Text>
               : videos.map((video: any, index) => {
                 return (
                   <View key={index}>
@@ -75,7 +75,7 @@ export default function Search() {
                     }>
                       <VideoThumbnail source={{ uri: thumbnails[index] }}/>
                     </TouchableOpacity>
-                    <VideoTitle>{titles[index]}</VideoTitle>
+                    <VideoTitle style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>{titles[index]}</VideoTitle>
                   </View>
                 )
               }
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
 
   container_dark: {
-    backgroundColor: "black",
+    backgroundColor: "#0d253f",
     flex: 1,
     alignItems: "center",
   },
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     shadowColor: "#01b4e4",
     shadowOffset: {width: 2, height: 2},
-    shadowRadius: 10,
-    shadowOpacity: .74,
+    shadowRadius: 5,
+    shadowOpacity: .25,
   },
 
   titleText: {
@@ -139,4 +139,16 @@ const styles = StyleSheet.create({
     color: "white",
     paddingBottom: 15,
   },
+
+  text_light: {
+    marginBottom: 20,
+    color: '#000',
+    textAlign: "center",
+  },
+
+  text_dark: {
+    marginBottom: 20,
+    color: "#fff",
+    textAlign: "center",
+  }
 });

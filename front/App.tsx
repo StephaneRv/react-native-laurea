@@ -13,6 +13,7 @@ import VideoViewer from './src/components/VideoViewer';
 import { BottomTabBarHeightCallbackContext } from '@react-navigation/bottom-tabs';
 import TrendingVideos from './src/tabs/TrendingVids';
 import Account from './src/tabs/Account';
+import { StatusBar } from 'expo-status-bar';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -49,17 +50,18 @@ export default function App() {
 
   return (
     <>
-      <NavigationContainer >
+      <NavigationContainer >  
         <Stack.Navigator 
           screenOptions={colorScheme == 'dark' ? 
             {headerStyle: {
-              backgroundColor: "black",
+              backgroundColor: "#0d253f",
               }, 
               headerTintColor: "#fff",
             } : 
             {headerStyle: {
               backgroundColor: "white",
               },
+              headerTintColor: "black",
             } 
           } >
           <Stack.Screen name="Login" component={LoginScreen} />
@@ -76,14 +78,3 @@ export default function App() {
     </>
   );
 }
- 
-const styles = StyleSheet.create({
-  View: {
-    backgroundColor: "#fff",
-  },
-
-  View_dark: {
-    backgroundColor: "black",
-    color: "white",
-  }
-})
