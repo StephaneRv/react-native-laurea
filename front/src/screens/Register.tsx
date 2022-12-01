@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   StyleSheet,
   Text,
@@ -6,7 +7,11 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Appearance,
 } from "react-native";
+
 import axios from "axios";
 
 export default function RegisterScreen({ navigation }) {
@@ -41,48 +46,57 @@ export default function RegisterScreen({ navigation }) {
     });
   }
 
+  const colorScheme = Appearance.getColorScheme();
+
   return (
-    <View style={styles.container}>
-      <Image style={styles.logo} source={require("../../assets/images/adaptive-icon.png")} />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={colorScheme == 'light' ? styles.container : styles.container_dark}>
+        <Image style={styles.logo} source={require("../../assets/images/full.png")} />
 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email"
-          placeholderTextColor="#003f5c"
-          onChangeText={(username) => setUsername(username)}
-        />
+        <View style={styles.loginContainer}>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              autoCorrect={false}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              placeholder="Email Address"
+              placeholderTextColor="#bbc9bf"
+              onChangeText={(username) => setUsername(username)}
+            />
+          </View>
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(password) => setPassword(password)}
+            />
+          </View>
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Confirm Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
+            />
+          </View>
+
+          <TouchableOpacity style={styles.registerBtn} onPress={ () => CreateUser()}>
+            <Text style={styles.registerText}>Register</Text>
+          </TouchableOpacity>
+
+			    <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.forgot_button}>Already have an account? Login</Text>
+          </TouchableOpacity>
+            {/* <Text>{success ? "Account created successfully" : ""}</Text> */}
+        </View>
       </View>
-
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
-      </View>
-
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Confirm Password"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-        />
-      </View>
-
-      <TouchableOpacity style={styles.registerBtn} onPress={ () => CreateUser()}>
-        <Text style={styles.registerText}>Register</Text>
-      </TouchableOpacity>
-
-			<TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.forgot_button}>Already have an account? Login</Text>
-      </TouchableOpacity>
-      {/* <Text>{success ? "Account created successfully" : ""}</Text> */}
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -93,26 +107,47 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
+  container_dark: {
+    backgroundColor: "#0d253f",
+    flex: 1,
+    alignItems: "center",
+  },
+
   logo: {
     marginTop: 60,
-    marginBottom: 10,
-    width: 200,
-    height: 200,
+    marginBottom: 60,
   },
 
   inputView: {
-    backgroundColor: "#FFC0CB",
-    borderRadius: 30,
-    width: "70%",
+    backgroundColor: "white",
+    borderStyle: "solid",
+    borderColor: "#0d253f",
+    width: "100%",
     height: 45,
     marginBottom: 20,
     alignItems: "center",
+    shadowColor: "rgba(13,37,63,0.74)",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 25,
+    shadowOpacity: .50,
+  },
+
+  loginContainer: {
+    width: "75%",
+    position: "relative",
+    backgroundColor: "#90cea1",
+    alignItems: "center",
+    padding: 30,
+    shadowColor: "#01b4e4",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 33,
+    shadowOpacity: .74,
   },
 
   TextInput: {
     height: 50,
     flex: 1,
-    padding: 10,
+    padding: 5,
     // marginLeft: 20,
   },
 
@@ -128,16 +163,20 @@ const styles = StyleSheet.create({
   },
 
   registerBtn: {
-    width: "70%",
-    borderRadius: 25,
+    width: "50%",
     height: 45,
     alignItems: "center",
     justifyContent: "center",
 		marginBottom: 20,
-    backgroundColor: "#FF1493",
+    backgroundColor: "#0d253f",
+    shadowColor: "rgba(13,37,63,0.74)",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 25,
+    shadowOpacity: .50,
   },
 
 	registerText: {
 		fontStyle: "normal",
+    color: "white",
 	},
 });

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView, TouchableOpacity, View, Text } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View, Text, Image, Appearance } from "react-native";
 import styled from 'styled-components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native'
@@ -22,13 +22,21 @@ export default function Search() {
 
 	const navigation = useNavigation();
 
+  const colorScheme = Appearance.getColorScheme();
+
   return (
     <>
-      <SafeAreaView>
+      <SafeAreaView style={colorScheme == 'light' ? styles.container : styles.container_dark}>
+        <View style={styles.titleContainer}>
+          <Image style={styles.logo} source={require("../../assets/images/long.png")} />
+          <Text style={styles.titleText}>Search</Text>
+        </View>
+
         <SearchContainer>
           <Ionicons name="search" size={20} color="#000" />
           <SearchInput
-            placeholder="Search video"
+            placeholder="Search movies, tv, or people here"
+            placeholderTextColor="#bbc9bf"
             onChangeText={setQuery}
             value={query}
             onSubmitEditing={() => {
@@ -51,11 +59,11 @@ export default function Search() {
             }}
           />
         </SearchContainer>
-      </SafeAreaView>
+      
       <ScrollView>
           { searched ?
             ( loading ?
-              <Text>Loading...</Text>
+              <Text style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>Loading...</Text>
               : videos.map((video: any, index) => {
                 return (
                   <View key={index}>
@@ -67,13 +75,14 @@ export default function Search() {
                     }>
                       <VideoThumbnail source={{ uri: thumbnails[index] }}/>
                     </TouchableOpacity>
-                    <VideoTitle>{titles[index]}</VideoTitle>
+                    <VideoTitle style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>{titles[index]}</VideoTitle>
                   </View>
                 )
               }
             )
           ) : null}
       </ScrollView>
+      </SafeAreaView>
     </>
   );
 }
@@ -91,3 +100,55 @@ const SearchInput = styled.TextInput`
   padding: 2px;
   margin: 12px;
 `;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+  },
+
+  container_dark: {
+    backgroundColor: "#0d253f",
+    flex: 1,
+    alignItems: "center",
+  },
+
+  logo: {
+		marginTop: 20,
+    marginBottom: 5,
+    resizeMode: "contain",
+    height: 20,
+  },
+
+  titleContainer: {
+    width: "100%",
+    position: "relative",
+    backgroundColor: "#0d253f",
+    alignItems: "center",
+    shadowColor: "#01b4e4",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 5,
+    shadowOpacity: .25,
+  },
+
+  titleText: {
+    fontFamily: "Helvetica",
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "white",
+    paddingBottom: 15,
+  },
+
+  text_light: {
+    marginBottom: 20,
+    color: '#000',
+    textAlign: "center",
+  },
+
+  text_dark: {
+    marginBottom: 20,
+    color: "#fff",
+    textAlign: "center",
+  }
+});
