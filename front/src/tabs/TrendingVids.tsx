@@ -3,7 +3,7 @@ import { StyleSheet, Text, SafeAreaView, ScrollView, View, TouchableOpacity, Ima
 import { VideoThumbnail, VideoTitle } from "../components/VideoUtils";
 import { useNavigation } from '@react-navigation/native'
 
-import YOUTUBE_API_KEY from "../../env";
+import ENV from "../../env";
 
 const MAX_RESULT = 10;
 
@@ -19,14 +19,13 @@ export default function TrendingVideos() {
   const colorScheme = Appearance.getColorScheme();
 
   useEffect(() => {
-    fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=${MAX_RESULT}&key=${YOUTUBE_API_KEY}`)
+    fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=${MAX_RESULT}&key=${ENV.YOUTUBE_API_KEY}`)
       .then(res => res.json())
       .then(data => {
         setVideos(data.items);
         let titles = [];
         let thumbnails = [];
         for (let i = 0; i < data.items.length; i++) {
-					// console.log("SUUUU: ", data.items[i]);
           titles.push(data.items[i].snippet.title);
           thumbnails.push(`http://img.youtube.com/vi/${data.items[i].id}/hqdefault.jpg`)
         }
@@ -43,7 +42,6 @@ export default function TrendingVideos() {
         <Image style={styles.logo} source={require("../../assets/images/long.png")} />
         <Text style={styles.titleText}>Trending</Text>
       </View>
-    
       <ScrollView>
         {loading ? (
           <Text style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>Loading...</Text>
