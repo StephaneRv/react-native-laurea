@@ -33,10 +33,16 @@ export default function LoginScreen({ navigation }) {
       password: password
     })
     .then((response) => {
-			setAnswer(response.data)
+      setAnswer(response.data)
       if (response.data === "Password incorrect") {
         alert("Password incorrect");
         return;
+      }
+      try {
+        AsyncStorage.setItem('@username', username)
+        // read data
+      } catch (e) {
+        // saving error
       }
 			navigation.replace('Tabs')
     }).catch(err => {

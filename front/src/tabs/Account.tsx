@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Alert,
   StyleSheet,
@@ -6,17 +6,24 @@ import {
   View,
   Image,
   Appearance,
-  Modal, 
+  Modal,
   Pressable,
 } from "react-native";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const colorScheme = Appearance.getColorScheme();
-const username = "ExampleUserName";
 
 //I can't get navigation going on this page.
 
 export default function Account({ navigation }) {
+  const [username, setUsername] = useState<any>();
   const [modalVisible, setModalVisible] = useState(false);
+  const [tmp, setTmp] = useState(async () => {
+    let usr = await AsyncStorage.getItem('@username')
+    console.log(usr)
+    setUsername(usr);
+  })
 
   return (
     <View style={colorScheme == 'light' ? styles.container : styles.container_dark}>
@@ -29,7 +36,7 @@ Worry less about implementing it, more putting the inputs there. If you want to 
       <Text style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>Username: {username}</Text>
       <View style={styles.centeredView}>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {

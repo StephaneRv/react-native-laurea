@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@expo/webpack-config": "^0.17.0",
+    "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.1",
@@ -40,8 +42,7 @@
     "react-native-youtube-iframe": "^2.2.2",
     "react-navigation": "^4.4.4",
     "styled-components": "^5.3.6",
-    "undefined": "@expo/webpack-config^0.17.0",
-    "@expo/webpack-config": "^0.17.0"
+    "undefined": "@expo/webpack-config^0.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
