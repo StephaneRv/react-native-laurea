@@ -31,7 +31,7 @@ export default function RegisterScreen({ navigation }) {
     }
 
      //Add your computer's internal IPv4 address here
-    axios.post("http://192.168.1.206:3000/register", {
+     axios.post("http://192.168.10.194:3000/register", {
       user: username,
       password: password
     })
