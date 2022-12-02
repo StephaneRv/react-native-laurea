@@ -114,11 +114,7 @@ Worry less about implementing it, more putting the inputs there. If you want to 
         </TouchableOpacity>
       </View>
 
-      {/* <View style={styles.centeredView}>
-        <TouchableOpacity style={styles.loginBtn} onPress={() => SignOutUser()}>
-          <Text style={styles.loginText}>Sign Out</Text>
-        </TouchableOpacity>
-      </View> */}
+
       <View
         style={{
           flexDirection: "row",
@@ -128,7 +124,7 @@ Worry less about implementing it, more putting the inputs there. If you want to 
       >
         <Pressable
           style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}
+          onPress={() => SignOutUser()}
         >
           <Text style={styles.textStyleSignOut}>Sign Out</Text>
         </Pressable>
