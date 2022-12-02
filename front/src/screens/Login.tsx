@@ -25,15 +25,22 @@ export default function LoginScreen({ navigation }) {
     }
 
     //Add your computer's internal IPv4 address here
-    axios.post("http://192.168.1.206:3000/login", {
+    // Stephane: I changed the ipv4 adress to localhost because it didn't work on my computer
+    axios.post("http://localhost:3000/login", {
       user: username,
       password: password
     })
     .then((response) => {
 			setAnswer(response.data)
+      console.log(response.data);
+      if (response.data === "Password incorrect") {
+        alert("Password incorrect");
+        return;
+      }
 			navigation.replace('Tabs')
     }).catch(err => { // Handle errors if backend is not running
         setAnswer("User not found")
+        console.log("User not found")
     });
   }
 

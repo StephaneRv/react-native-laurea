@@ -70,8 +70,6 @@ app.post("/register", async (req,res) => {
     })
 })
 
-// const generateAccessToken = require("./generateAccessToken")
-
 app.post("/login", (req, res)=> {
     const username = req.body.user
     const password = req.body.password
@@ -93,8 +91,6 @@ app.post("/login", (req, res)=> {
                 const hashedPassword = result[0].password
                 if (await bcrypt.compare(password, hashedPassword)) {
                     console.log("---------> Login Successful")
-                    // console.log("---------> Generating Access Token")
-                    // const accessToken = generateAccessToken({user: username})
                     res.send(`${username} is logged in`)
                 }
                 else {
