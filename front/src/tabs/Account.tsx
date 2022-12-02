@@ -19,30 +19,22 @@ const username = "ExampleUserName";
 
 export default function Account({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [newUsername, setNewUsername] = useState('');
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  
-
+  const [newUsername, setNewUsername] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const SignOutUser = async () => {
-
     // Sign Out Function here!
-
-  }
+  };
 
   const SetNewUsername = async () => {
-
     // Check validity, if ok - update username in db!
-
-  }
+  };
 
   const ChangePassword = async () => {
-
-    // Check validity, if ok - set new password in DB 
-
-  }  
+    // Check validity, if ok - set new password in DB
+  };
   return (
     <View
       style={colorScheme == "light" ? styles.container : styles.container_dark}
@@ -63,77 +55,91 @@ Worry less about implementing it, more putting the inputs there. If you want to 
         User: {username}
       </Text>
       <View style={styles.loginContainer}>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              placeholder="New username"
-              placeholderTextColor="#bbc9bf"
-              onChangeText={(newUsername) => setNewUsername(newUsername)}
-            />
-          </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            autoCorrect={false}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            placeholder="New username"
+            placeholderTextColor="#bbc9bf"
+            onChangeText={(newUsername) => setNewUsername(newUsername)}
+          />
+        </View>
 
-          <TouchableOpacity style={styles.loginBtn} onPress={ () => SetNewUsername()}>
-            <Text style={styles.loginText}>Change name</Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => SetNewUsername()}
+        >
+          <Text style={styles.loginText}>Change name</Text>
+        </TouchableOpacity>
 
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Old Password"
+            placeholderTextColor="#bbc9bf"
+            secureTextEntry={true}
+            onChangeText={(oldPassword) => setOldPassword(oldPassword)}
+          />
+        </View>
 
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Old Password"
-              placeholderTextColor="#bbc9bf"
-              secureTextEntry={true}
-              onChangeText={(oldPassword) => setOldPassword(oldPassword)}
-            />
-          </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="New Password"
+            placeholderTextColor="#bbc9bf"
+            secureTextEntry={true}
+            onChangeText={(newPassword) => setNewPassword(newPassword)}
+          />
+        </View>
 
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="New Password"
-              placeholderTextColor="#bbc9bf"
-              secureTextEntry={true}
-              onChangeText={(newPassword) => setNewPassword(newPassword)}
-            />
-          </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Confirm New Password"
+            placeholderTextColor="#bbc9bf"
+            secureTextEntry={true}
+            onChangeText={(confirmPassword) =>
+              setConfirmPassword(confirmPassword)
+            }
+          />
+        </View>
 
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Confirm New Password"
-              placeholderTextColor="#bbc9bf"
-              secureTextEntry={true}
-              onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.loginBtn} onPress={ () => ChangePassword()}>
-            <Text style={styles.loginText}>Change password</Text>
-          </TouchableOpacity>
-
-        </View> 
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => ChangePassword()}
+        >
+          <Text style={styles.loginText}>Change password</Text>
+        </TouchableOpacity>
+      </View>
 
       {/* <View style={styles.centeredView}>
         <TouchableOpacity style={styles.loginBtn} onPress={() => SignOutUser()}>
           <Text style={styles.loginText}>Sign Out</Text>
         </TouchableOpacity>
       </View> */}
-      <Pressable
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => SignOutUser()}
-        >
-          <Text style={styles.textStyle}>Sign Out</Text>
-      </Pressable>      
-
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
+      <View
+        style={{
+          flexDirection: "row",
+          height: 100,
+          padding: 20,
+        }}
       >
-        <Text style={styles.textStyle}>About</Text>
-      </Pressable>
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.textStyleSignOut}>Sign Out</Text>
+        </Pressable>
+
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.textStyle}>About</Text>
+        </Pressable>
+      </View>
 
       <View style={styles.centeredView}>
         <Modal
@@ -202,10 +208,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     alignItems: "center",
     shadowColor: "rgba(13,37,63,0.74)",
-    shadowOffset: {width: 2, height: 2},
+    shadowOffset: { width: 2, height: 2 },
     shadowRadius: 25,
-    shadowOpacity: .50,
-  }, 
+    shadowOpacity: 0.5,
+  },
 
   loginContainer: {
     width: "75%",
@@ -215,9 +221,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 30,
     shadowColor: "#01b4e4",
-    shadowOffset: {width: 2, height: 2},
+    shadowOffset: { width: 2, height: 2 },
     shadowRadius: 33,
-    shadowOpacity: .74,
+    shadowOpacity: 0.74,
   },
 
   TextInput: {
@@ -291,6 +297,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  textStyleSignOut: {
+    color: "red",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
@@ -301,16 +312,16 @@ const styles = StyleSheet.create({
     height: 45,
     alignItems: "center",
     justifyContent: "center",
-		marginBottom: 20,
+    marginBottom: 20,
     backgroundColor: "#0d253f",
     shadowColor: "rgba(13,37,63,0.74)",
-    shadowOffset: {width: 2, height: 2},
+    shadowOffset: { width: 2, height: 2 },
     shadowRadius: 25,
-    shadowOpacity: .50,
+    shadowOpacity: 0.5,
   },
 
-	loginText: {
-		fontStyle: "normal",
+  loginText: {
+    fontStyle: "normal",
     color: "white",
-	},
+  },
 });
