@@ -14,6 +14,8 @@ import {
 
 import axios from "axios";
 import ENV from "../../env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -39,6 +41,11 @@ export default function RegisterScreen({ navigation }) {
     .then((response) => {
       // console.log(response);
       if (response.status === 201) {
+        try {
+          AsyncStorage.setItem('@username', username)
+        } catch (e) {
+            console.log(e)
+        }
 			  navigation.replace('Tabs')
         setSuccess(true);
       } else {

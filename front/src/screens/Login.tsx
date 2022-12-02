@@ -40,9 +40,8 @@ export default function LoginScreen({ navigation }) {
       }
       try {
         AsyncStorage.setItem('@username', username)
-        // read data
       } catch (e) {
-        // saving error
+          console.log(e)
       }
 			navigation.replace('Tabs')
     }).catch(err => {
