@@ -13,6 +13,7 @@ import {
 } from "react-native";
 
 import axios from "axios";
+import ENV from "../../env";
 
 export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -31,7 +32,7 @@ export default function RegisterScreen({ navigation }) {
     }
 
      //Add your computer's internal IPv4 address here
-    axios.post("http://192.168.1.206:3000/register", {
+    axios.post(`${ENV.BACKEND_URL}/register`, {
       user: username,
       password: password
     })

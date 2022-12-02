@@ -13,6 +13,7 @@ import {
   SafeAreaView
 } from "react-native";
 import axios from "axios";
+import ENV from "../../env";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -26,14 +27,13 @@ export default function LoginScreen({ navigation }) {
     }
 
     //Add your computer's internal IPv4 address here
-    // Stephane: I changed the ipv4 adress to localhost because it didn't work on my computer
-    axios.post("http://localhost:3000/login", {
+    axios.post(`${ENV.BACKEND_URL}/login`, {
       user: username,
       password: password
     })
     .then((response) => {
 			setAnswer(response.data)
-      console.log(response.data);
+      // console.log(response.data);
       if (response.data === "Password incorrect") {
         alert("Password incorrect");
         return;
