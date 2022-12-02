@@ -10,10 +10,12 @@ import {
   Keyboard,
   Appearance,
   StatusBar,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import axios from "axios";
 import ENV from "../../env";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -26,20 +28,18 @@ export default function LoginScreen({ navigation }) {
       return;
     }
 
-    //Add your computer's internal IPv4 address here
     axios.post(`${ENV.BACKEND_URL}/login`, {
       user: username,
       password: password
     })
     .then((response) => {
 			setAnswer(response.data)
-      // console.log(response.data);
       if (response.data === "Password incorrect") {
         alert("Password incorrect");
         return;
       }
 			navigation.replace('Tabs')
-    }).catch(err => { // Handle errors if backend is not running
+    }).catch(err => {
         setAnswer("User not found")
         console.log("User not found")
     });
