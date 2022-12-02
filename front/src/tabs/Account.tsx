@@ -7,6 +7,7 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -18,6 +19,11 @@ const username = "ExampleUserName";
 
 export default function Account({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [newUsername, setNewUsername] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  
 
 
   const SignOutUser = async () => {
@@ -26,6 +32,17 @@ export default function Account({ navigation }) {
 
   }
 
+  const SetNewUsername = async () => {
+
+    // Check validity, if ok - update username in db!
+
+  }
+
+  const ChangePassword = async () => {
+
+    // Check validity, if ok - set new password in DB 
+
+  }  
   return (
     <View
       style={colorScheme == "light" ? styles.container : styles.container_dark}
@@ -39,17 +56,84 @@ export default function Account({ navigation }) {
 Worry less about implementing it, more putting the inputs there. If you want to do it in more than one page, like refer back to the change password screen, Or maybe just nothing works there, and it's just the inputs and general look of it.
 [16:58, 01/12/2022] Kimberly Ruohio: But of course the ability to logout.
 [16:59, 01/12/2022] Kimberly Ruohio: Even if it's not really logging out just yet. */}
+
       <Text
         style={colorScheme == "light" ? styles.text_light : styles.text_dark}
       >
         User: {username}
       </Text>
+      <View style={styles.loginContainer}>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              autoCorrect={false}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              placeholder="New username"
+              placeholderTextColor="#bbc9bf"
+              onChangeText={(newUsername) => setNewUsername(newUsername)}
+            />
+          </View>
 
-      <View style={styles.centeredView}>
+          <TouchableOpacity style={styles.loginBtn} onPress={ () => SetNewUsername()}>
+            <Text style={styles.loginText}>Change name</Text>
+          </TouchableOpacity>
+
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Old Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(oldPassword) => setOldPassword(oldPassword)}
+            />
+          </View>
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="New Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(newPassword) => setNewPassword(newPassword)}
+            />
+          </View>
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Confirm New Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
+            />
+          </View>
+
+          <TouchableOpacity style={styles.loginBtn} onPress={ () => ChangePassword()}>
+            <Text style={styles.loginText}>Change password</Text>
+          </TouchableOpacity>
+
+        </View> 
+
+      {/* <View style={styles.centeredView}>
         <TouchableOpacity style={styles.loginBtn} onPress={() => SignOutUser()}>
           <Text style={styles.loginText}>Sign Out</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
+      <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => SignOutUser()}
+        >
+          <Text style={styles.textStyle}>Sign Out</Text>
+      </Pressable>      
+
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={styles.textStyle}>About</Text>
+      </Pressable>
 
       <View style={styles.centeredView}>
         <Modal
@@ -83,12 +167,6 @@ Worry less about implementing it, more putting the inputs there. If you want to 
             </View>
           </View>
         </Modal>
-        <Pressable
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}
-        >
-          <Text style={styles.textStyle}>About</Text>
-        </Pressable>
       </View>
     </View>
   );
@@ -110,8 +188,43 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    marginTop: 100,
-    marginBottom: 60,
+    marginTop: 50,
+    marginBottom: 30,
+  },
+
+  inputView: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    borderStyle: "solid",
+    borderColor: "#0d253f",
+    width: "100%",
+    height: 45,
+    marginBottom: 5,
+    alignItems: "center",
+    shadowColor: "rgba(13,37,63,0.74)",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 25,
+    shadowOpacity: .50,
+  }, 
+
+  loginContainer: {
+    width: "75%",
+    borderRadius: 5,
+    position: "relative",
+    backgroundColor: "#90cea1",
+    alignItems: "center",
+    padding: 30,
+    shadowColor: "#01b4e4",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 33,
+    shadowOpacity: .74,
+  },
+
+  TextInput: {
+    height: 50,
+    flex: 1,
+    padding: 5,
+    // marginLeft: 20,
   },
 
   text_light: {
@@ -155,7 +268,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 20,
-    backgroundColor: "#0d253f",
+    // backgroundColor: "#0d253f",
     shadowColor: "rgba(13,37,63,0.74)",
     shadowOffset: { width: 2, height: 2 },
     shadowRadius: 25,
@@ -183,7 +296,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   loginBtn: {
-    width: "50%",
+    width: "70%",
+    borderRadius: 5,
     height: 45,
     alignItems: "center",
     justifyContent: "center",
