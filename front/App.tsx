@@ -69,7 +69,7 @@ export default function App() {
           <Stack.Screen name="Tabs" component={TabsScreen} options={{headerShown: false}} />
           <Stack.Screen name="Forgot Password" component={ResetPasswordScreen} />
           <Stack.Screen name="Account" component={Account} />
-          <Stack.Screen name ="VideoViewer" component={VideoViewer} options={{title: ""}}/>
+          <Stack.Screen name ="Movie" component={VideoViewer} options={{title: ""}}/>
 
         </Stack.Navigator>
         <View onLayout={onLayoutRootView} >

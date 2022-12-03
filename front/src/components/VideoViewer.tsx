@@ -1,48 +1,23 @@
 import React, { useState } from "react";
-import { Appearance, SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { Image, Appearance, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import YoutubePlayer from 'react-native-youtube-iframe';
 import styled from 'styled-components';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
-
-import { VideoAuthor, VideoTitle, VideoDescription } from "./VideoUtils";
-
-// import YOUTUBE_API_KEY from "../../env";
+import { VideoAuthor, VideoTitle, VideoDescription, VideoThumbnail } from "./VideoUtils";
 
 const colorScheme = Appearance.getColorScheme();
 
-const MAX_RESULT = 5;
-
-export default function VideoViewer( params: any ) {
+export default function VideoViewer({ route }) {
 
   return (
-	<SafeAreaView style={colorScheme == 'light' ? styles.container : styles.container_dark}>
-		<VideoView>
-			<YoutubePlayer
-				height={270}
-				// play={false}
-				videoId={ params.route.params.isFromSearchTab ? params.route.params.video.id.videoId : params.route.params.video.id }
-			/>
-		</VideoView>
-			
-		<VideoTitle style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>
-			{params.route.params.video.snippet.title}
-		</VideoTitle>
-		<VideoAuthor style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>
-			{params.route.params.video.snippet.channelTitle}
-		</VideoAuthor>
-		<ScrollView>
-			<VideoDescription style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>
-				{params.route.params.video.snippet.description}
-			</VideoDescription>
-      	</ScrollView>
-	</SafeAreaView>
-
+    <SafeAreaView style={colorScheme == 'light' ? styles.container : styles.container_dark}>
+      <ScrollView style={styles.scrollContainer}>
+        <Image style={styles.thumbnailContainer} source={{ uri: route.params.thumbnail }} />
+        <VideoTitle>{route.params.movie.title}</VideoTitle>
+        <VideoDescription>{route.params.movie.overview}</VideoDescription>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
-
-const VideoView = styled.View`
-  // padding-top: 10px;
-`;
 
 const styles = StyleSheet.create({
 	container: {
@@ -67,6 +42,18 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 		color: "#fff",
 		
-	  }
+	  },
 
+    scrollContainer: {
+        width: "100%",
+        padding: 10,
+    },
+
+    thumbnailContainer: {
+      width: "100%",
+      height: 600,
+      resizeMode: "cover",
+      marginBottom: 10,
+      borderRadius: 10,
+    },
 });

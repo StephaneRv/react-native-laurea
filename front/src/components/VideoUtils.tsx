@@ -9,7 +9,7 @@ const VideoThumbnail = styled.Image`
 const VideoTitle = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  margin: 0px 10px;
+  margin: 10px 10px;
   padding-bottom: 10px;
 `;
 

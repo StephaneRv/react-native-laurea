@@ -5,67 +5,56 @@ import { useNavigation } from '@react-navigation/native'
 
 import ENV from "../../env";
 
-const MAX_RESULT = 10;
+const TMDB_API_KEY = ENV.TMDB_API_KEY;
 
 export default function TrendingVideos() {
-  const [videos, setVideos] = useState([]);
+
+  const [movies, setMovies] = useState([]);
   const [titles, setTitles] = useState([""]);
   const [thumbnails, setThumbnails] = useState([""]);
 
-  const [loading, setLoading] = useState(true);
-
-	const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const colorScheme = Appearance.getColorScheme();
 
   useEffect(() => {
-    fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=${MAX_RESULT}&key=${ENV.YOUTUBE_API_KEY}`)
+    fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${TMDB_API_KEY}`)
       .then(res => res.json())
       .then(data => {
-        setVideos(data.items);
+        setMovies(data.results);
         let titles = [];
         let thumbnails = [];
-        for (let i = 0; i < data.items.length; i++) {
-          titles.push(data.items[i].snippet.title);
-          thumbnails.push(`http://img.youtube.com/vi/${data.items[i].id}/hqdefault.jpg`)
+        for (let i = 0; i < data.results.length; i++) {
+          titles.push(data.results[i].title);
+          thumbnails.push(`https://image.tmdb.org/t/p/w500${data.results[i].poster_path}`)
         }
         setTitles(titles);
         setThumbnails(thumbnails);
-        setLoading(false);
       })
       .catch(err => console.log(err));
   }, []);
 
+
   return (
-    <SafeAreaView style={colorScheme == 'light' ? styles.container : styles.container_dark}>
-      <View style={styles.titleContainer}>
-        <Image style={styles.logo} source={require("../../assets/images/long.png")} />
-        <Text style={styles.titleText}>Trending</Text>
-      </View>
-      <ScrollView>
-        {loading ? (
-          <Text style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>Loading...</Text>
-        ) :
-          videos.map((video: any, index) => {
-            return (
-							<View key={index}>
-								<TouchableOpacity
-										onPress={() => navigation.navigate("VideoViewer", {
-											video: video,
-											isFromSearchTab: false
-										})
-									}>
-	                <VideoThumbnail source={{ uri: thumbnails[index] }}/>
-								</TouchableOpacity>
-								<VideoTitle style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>{titles[index]}</VideoTitle>
-							</View>
-						)
-          }
-        )}
-      </ScrollView>
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={colorScheme == 'light' ? styles.container : styles.container_dark}>
+        <View style={styles.titleContainer}>
+          <Image style={styles.logo} source={require("../../assets/images/long.png")} />
+          <Text style={styles.titleText}>Trending Movies</Text>
+        </View>
+        <ScrollView style={styles.scrollContainer}>
+          {movies.map((movie, index) => (
+            <TouchableOpacity key={index} onPress={() => navigation.navigate('Movie', { movie: movie, thumbnail: thumbnails[index] })}>
+              <Image key={index} style={styles.thumbnail} source={{ uri: thumbnails[index] }} />
+              <VideoTitle>{titles[index]}</VideoTitle>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -81,7 +70,7 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-		marginTop: 20,
+    marginTop: 20,
     marginBottom: 5,
     resizeMode: "contain",
     height: 20,
@@ -93,7 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0d253f",
     alignItems: "center",
     shadowColor: "#01b4e4",
-    shadowOffset: {width: 2, height: 2},
+    shadowOffset: { width: 2, height: 2 },
     shadowRadius: 5,
     shadowOpacity: .25,
   },
@@ -116,5 +105,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: "#fff",
     textAlign: "center",
-  }
+  },
+
+  scrollContainer: {
+    width: "100%",
+    marginTop: 10,
+    marginBottom: 10,
+  },
+
+  thumbnail: {
+    width: "100%",
+    height: 600,
+    resizeMode: "cover",
+  },
 });
