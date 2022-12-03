@@ -3,6 +3,7 @@ import {
   Alert,
   Appearance,
   Image,
+  Linking,
   Modal,
   Pressable,
   StyleSheet,
@@ -159,12 +160,19 @@ Worry less about implementing it, more putting the inputs there. If you want to 
                 TMDB clone application{"\n"}LAUREA UAS{"\n"}
               </Text>
               <Text style={styles.modalText}>
-                Students:{"\n"}Joel Isotalo{"\n"}Thomas Meurice{"\n"}Igor
+                Students:{"\n"}Joel Isotalo{"\n"}Igor
                 Rautiainen{"\n"}Stéphane Riveaux{"\n"}Kimberly Ruohio{"\n"}
               </Text>
               <Text style={styles.modalText}>
                 Teacher:{"\n"}Paresh Rathod{"\n"}
                 {"\n"}2022{"\n"}
+              </Text>
+              <Text style={styles.modalText}>
+              This product uses the TMDB API but is not endorsed or certified by TMDB.
+              The information in this application is brought to you by:
+              </Text>
+              <Text style={styles.modalText} onPress={() => Linking.openURL('https://www.themoviedb.org')}>
+                The Movie Database
               </Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
