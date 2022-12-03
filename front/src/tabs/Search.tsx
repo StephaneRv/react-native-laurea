@@ -6,23 +6,36 @@ import { useNavigation } from '@react-navigation/native'
 
 import { VideoThumbnail, VideoTitle } from "../components/VideoUtils";
 
-import YOUTUBE_API_KEY from "../../env";
-
-const MAX_RESULT = 10;
+// import YOUTUBE_API_KEY from "../../env";
+import ENV from "../../env";
 
 export default function Search() {
 
-  const [query, setQuery] = useState();
-  const [searched, setSearched] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  const [videos, setVideos] = useState([]);
+  const [search, setSearch] = useState("");
+  const [movies, setMovies] = useState([]);
   const [titles, setTitles] = useState([""]);
   const [thumbnails, setThumbnails] = useState([""]);
 
-	const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const colorScheme = Appearance.getColorScheme();
+
+  const searchMovies = () => {
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${ENV.TMDB_API_KEY}&query=${search}&page=1&include_adult=false`)
+    .then(res => res.json())
+    .then(data => {
+      setMovies(data.results);
+      let titles = [];
+      let thumbnails = [];
+      for (let i = 0; i < data.results.length; i++) {
+        titles.push(data.results[i].title);
+        thumbnails.push(`https://image.tmdb.org/t/p/w500${data.results[i].poster_path}`)
+      }
+      setTitles(titles);
+      setThumbnails(thumbnails);
+      })
+      .catch(err => console.log(err));
+  }
 
   return (
     <>
@@ -31,57 +44,25 @@ export default function Search() {
           <Image style={styles.logo} source={require("../../assets/images/long.png")} />
           <Text style={styles.titleText}>Search</Text>
         </View>
-
         <SearchContainer>
-          <Ionicons name="search" size={20} color="#000" />
           <SearchInput
-            placeholder="Search movies, tv, or people here"
-            placeholderTextColor="#bbc9bf"
-            onChangeText={setQuery}
-            value={query}
-            onSubmitEditing={() => {
-              fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${MAX_RESULT}&q=${query}&key=${YOUTUBE_API_KEY}`)
-              .then(res => res.json())
-              .then(data => {
-                setVideos(data.items);
-                let titles = [];
-                let thumbnails = [];
-                for (let i = 0; i < data.items.length; i++) {
-                  titles.push(data.items[i].snippet.title);
-                  thumbnails.push(`http://img.youtube.com/vi/${data.items[i].id.videoId}/hqdefault.jpg`)
-                }
-                setTitles(titles);
-                setThumbnails(thumbnails);
-                setSearched(true);
-                setLoading(false);
-              })
-              .catch(err => console.log(err));
-            }}
+            placeholder="Search for a movie..."
+            onChangeText={text => setSearch(text)}
+            value={search}
+            onSubmitEditing={searchMovies}
           />
+          {/* <TouchableOpacity onPress={searchMovies}> /!\ Commented this because it crashes when clicked, idk why so you have to press enter to validate
+            <Ionicons name="search" size={30} color="black" />
+          </TouchableOpacity> */}
         </SearchContainer>
-      
-      <ScrollView>
-          { searched ?
-            ( loading ?
-              <Text style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>Loading...</Text>
-              : videos.map((video: any, index) => {
-                return (
-                  <View key={index}>
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate("VideoViewer", {
-                        video: video,
-                        isFromSearchTab: true
-                      })
-                    }>
-                      <VideoThumbnail source={{ uri: thumbnails[index] }}/>
-                    </TouchableOpacity>
-                    <VideoTitle style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>{titles[index]}</VideoTitle>
-                  </View>
-                )
-              }
-            )
-          ) : null}
-      </ScrollView>
+        <ScrollView style={styles.scrollContainer}>
+          {movies.map((movie, index) => (
+            <TouchableOpacity key={index} onPress={() => navigation.navigate('Movie', { movie: movie, thumbnail: thumbnails[index] })}>
+              <Image key={index} style={styles.thumbnail} source={{ uri: thumbnails[index] ? thumbnails[index] : null }} />
+              <VideoTitle>{titles[index]}</VideoTitle>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </SafeAreaView>
     </>
   );
@@ -150,5 +131,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: "#fff",
     textAlign: "center",
-  }
+  },
+
+  scrollContainer: {
+    width: "100%",
+    marginTop: 10,
+  },
+
+  thumbnail: {
+    width: "100%",
+    height: 600,
+    resizeMode: "cover",
+  },
+
 });

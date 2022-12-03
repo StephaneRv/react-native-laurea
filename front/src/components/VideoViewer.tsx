@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		alignItems: "center",
 	  },
-	
+
 	  container_dark: {
 		backgroundColor: "#0d253f",
 		flex: 1,
@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
 	  text_light: {
 		marginBottom: 20,
 		color: '#000',
-		
+
 	  },
-	
+
 	  text_dark: {
 		marginBottom: 20,
 		color: "#fff",
-		
+
 	  },
 
     scrollContainer: {
