@@ -45,7 +45,7 @@ export default function TrendingVideos() {
         <ScrollView style={styles.scrollContainer}>
           {movies.map((movie, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Movie', { movie: movie, thumbnail: thumbnails[index] })}>
-              <Image key={index} style={styles.thumbnail} source={{ uri: thumbnails[index] }} />
+              <Image key={index} style={styles.thumbnail} source={{ uri: thumbnails[index] ? thumbnails[index] : null }} />
               <VideoTitle>{titles[index]}</VideoTitle>
             </TouchableOpacity>
           ))}

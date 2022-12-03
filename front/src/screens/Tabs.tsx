@@ -19,8 +19,8 @@ export default function TabsScreen({ navigation }) {
 
             if (route.name === 'Trends') {
               iconName = focused
-                ? 'home'
-                : 'home-outline';
+                ? 'flame'
+                : 'flame-outline';
             } else if (route.name === 'Search') {
               iconName = focused
                 ? 'search'
