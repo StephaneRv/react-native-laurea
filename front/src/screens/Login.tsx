@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
+  Alert, 
   Text,
   View,
   Image,
+  Linking, 
+  Modal, 
+  Pressable,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -21,6 +25,7 @@ export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [answer , setAnswer] = useState<string>();
+  const [modalVisible, setModalVisible] = useState(false);
 
 	const LoginUser = async () => {
     if (!username || !password) {
@@ -95,7 +100,57 @@ export default function LoginScreen({ navigation }) {
             <Text style={styles.forgot_button}>Forgot Password?</Text>
           </TouchableOpacity>
 			      {/* <Text>{answer ? answer : ""}</Text> */}
+
+          <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible(true)}
+            >
+            <Text style={styles.textStyle}>About</Text>
+          </Pressable> 
+
+          <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+                TMDB clone application{"\n"}LAUREA UAS{"\n"}
+              </Text>
+              <Text style={styles.modalText}>
+                Students:{"\n"}Joel Isotalo{"\n"}Igor
+                Rautiainen{"\n"}Stéphane Riveaux{"\n"}Kimberly Ruohio{"\n"}
+              </Text>
+              <Text style={styles.modalText}>
+                Teacher:{"\n"}Paresh Rathod{"\n"}
+                {"\n"}2022{"\n"}
+              </Text>
+              <Text style={styles.modalText}>
+              This product uses the TMDB API but is not endorsed or certified by TMDB.
+              The information in this application is brought to you by:
+              </Text>
+              <Text style={styles.modalText} onPress={() => Linking.openURL('https://www.themoviedb.org')}>
+                The Movie Database
+              </Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>OK</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </View>          
+
         </View>
+      
       </View>
     </TouchableWithoutFeedback>
     </SafeAreaView>
@@ -189,4 +244,63 @@ const styles = StyleSheet.create({
 		fontStyle: "normal",
     color: "white",
 	},
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 10,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    width: "50%",
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    // backgroundColor: "#0d253f",
+    shadowColor: "rgba(13,37,63,0.74)",
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 25,
+    shadowOpacity: 0.5,
+  },
+  buttonClose: {
+    width: 100,
+    height: 35,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    backgroundColor: "#0d253f",
+    shadowColor: "rgba(13,37,63,0.74)",
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 25,
+    shadowOpacity: 0.5,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
 });
