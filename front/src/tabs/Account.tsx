@@ -11,6 +11,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -33,7 +35,7 @@ export default function Account({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const SignOutUser = async () => {
-      navigation.replace('Login')
+    navigation.replace('Login')
   };
 
   const SetNewUsername = async () => {
@@ -49,14 +51,14 @@ export default function Account({ navigation }) {
       username: username,
       newUsername: newUsername,
     })
-    .then((response) => {
-      if (response.status === 200) {
-        Alert.alert("Username changed successfully");
-        setUsername(newUsername);
-      } else {
-        Alert.alert("Username change failed");
-      }
-    });
+      .then((response) => {
+        if (response.status === 200) {
+          Alert.alert("Username changed successfully");
+          setUsername(newUsername);
+        } else {
+          Alert.alert("Username change failed");
+        }
+      });
   };
 
   const SetNewPassword = async () => {
@@ -73,152 +75,154 @@ export default function Account({ navigation }) {
       oldPassword: oldPassword,
       newPassword: newPassword,
     })
-    .then((response) => {
-      if (response.status === 200) {
-        Alert.alert("Password changed successfully");
-      } else {
-        Alert.alert("Password change failed");
-      }
-    });
+      .then((response) => {
+        if (response.status === 200) {
+          Alert.alert("Password changed successfully");
+        } else {
+          Alert.alert("Password change failed");
+        }
+      });
   };
 
   return (
-    <View
-      style={colorScheme == "light" ? styles.container : styles.container_dark}
-    >
-      <Image
-        style={styles.logo}
-        source={require("../../assets/images/short.png")}
-      />
-      <Text
-        style={colorScheme == "light" ? styles.text_light : styles.text_dark}
-      >
-        User: {username}
-      </Text>
-      <View style={styles.loginContainer}>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            autoCorrect={false}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            placeholder="New username"
-            placeholderTextColor="#bbc9bf"
-            onChangeText={(newUsername) => setNewUsername(newUsername)}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={styles.loginBtn}
-          onPress={() => SetNewUsername()}
-        >
-          <Text style={styles.loginText}>Change name</Text>
-        </TouchableOpacity>
-
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Old Password"
-            placeholderTextColor="#bbc9bf"
-            secureTextEntry={true}
-            onChangeText={(oldPassword) => setOldPassword(oldPassword)}
-          />
-        </View>
-
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="New Password"
-            placeholderTextColor="#bbc9bf"
-            secureTextEntry={true}
-            onChangeText={(newPassword) => setNewPassword(newPassword)}
-          />
-        </View>
-
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Confirm New Password"
-            placeholderTextColor="#bbc9bf"
-            secureTextEntry={true}
-            onChangeText={(confirmPassword) =>
-              setConfirmPassword(confirmPassword)
-            }
-          />
-        </View>
-
-        <TouchableOpacity
-          style={styles.loginBtn}
-          onPress={() => SetNewPassword()}
-        >
-          <Text style={styles.loginText}>Change password</Text>
-        </TouchableOpacity>
-      </View>
-
-
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View
-        style={{
-          flexDirection: "row",
-          height: 100,
-          padding: 20,
-        }}
+        style={colorScheme == "light" ? styles.container : styles.container_dark}
       >
-        <Pressable
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => SignOutUser()}
+        <Image
+          style={styles.logo}
+          source={require("../../assets/images/short.png")}
+        />
+        <Text
+          style={colorScheme == "light" ? styles.text_light : styles.text_dark}
         >
-          <Text style={styles.textStyleSignOut}>Sign Out</Text>
-        </Pressable>
+          User: {username}
+        </Text>
+        <View style={styles.loginContainer}>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              autoCorrect={false}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              placeholder="New username"
+              placeholderTextColor="#bbc9bf"
+              onChangeText={(newUsername) => setNewUsername(newUsername)}
+            />
+          </View>
 
-        <Pressable
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}
-        >
-          <Text style={colorScheme == 'light' ? styles.textStyle : styles.textStyle_dark}>About</Text>
-        </Pressable>
-      </View>
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => SetNewUsername()}
+          >
+            <Text style={styles.loginText}>Change name</Text>
+          </TouchableOpacity>
 
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            setModalVisible(!modalVisible);
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Old Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(oldPassword) => setOldPassword(oldPassword)}
+            />
+          </View>
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="New Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(newPassword) => setNewPassword(newPassword)}
+            />
+          </View>
+
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Confirm New Password"
+              placeholderTextColor="#bbc9bf"
+              secureTextEntry={true}
+              onChangeText={(confirmPassword) =>
+                setConfirmPassword(confirmPassword)
+              }
+            />
+          </View>
+
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => SetNewPassword()}
+          >
+            <Text style={styles.loginText}>Change password</Text>
+          </TouchableOpacity>
+        </View>
+
+
+        <View
+          style={{
+            flexDirection: "row",
+            height: 100,
+            padding: 20,
           }}
         >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>
-                TMDB clone application{"\n"}LAUREA UAS{"\n"}
-              </Text>
-              <Text style={styles.modalText}>
-                Students:{"\n"}Joel Isotalo{"\n"}Igor
-                Rautiainen{"\n"}Stéphane Riveaux{"\n"}Kimberly Ruohio{"\n"}
-              </Text>
-              <Text style={styles.modalText}>
-                Teacher:{"\n"}Paresh Rathod{"\n"}
-                {"\n"}2022{"\n"}
-              </Text>
-              <Text style={styles.modalText}>
-              This product uses the TMDB API but is not endorsed or certified by TMDB.
-              The information in this application is brought to you by:
-              </Text>
-              <Text style={styles.modalText} onPress={() => Linking.openURL('https://www.themoviedb.org')}>
-                The Movie Database
-              </Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle_dark}>OK</Text>
-              </Pressable>
+          <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => SignOutUser()}
+          >
+            <Text style={styles.textStyleSignOut}>Sign Out</Text>
+          </Pressable>
+
+          <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible(true)}
+          >
+            <Text style={colorScheme == 'light' ? styles.textStyle : styles.textStyle_dark}>About</Text>
+          </Pressable>
+        </View>
+
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>
+                  TMDB clone application{"\n"}LAUREA UAS{"\n"}
+                </Text>
+                <Text style={styles.modalText}>
+                  Students:{"\n"}Joel Isotalo{"\n"}Igor
+                  Rautiainen{"\n"}Stéphane Riveaux{"\n"}Kimberly Ruohio{"\n"}
+                </Text>
+                <Text style={styles.modalText}>
+                  Teacher:{"\n"}Paresh Rathod{"\n"}
+                  {"\n"}2022{"\n"}
+                </Text>
+                <Text style={styles.modalText}>
+                  This product uses the TMDB API but is not endorsed or certified by TMDB.
+                  The information in this application is brought to you by:
+                </Text>
+                <Text style={styles.modalText} onPress={() => Linking.openURL('https://www.themoviedb.org')}>
+                  The Movie Database
+                </Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={styles.textStyle_dark}>OK</Text>
+                </Pressable>
+              </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
