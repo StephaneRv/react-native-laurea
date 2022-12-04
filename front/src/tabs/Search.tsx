@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View, Text, Image, Appearance } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View, Text, Image, Appearance, Keyboard, } from "react-native";
 import styled from 'styled-components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native'
@@ -22,19 +22,21 @@ export default function Search() {
 
   const searchMovies = () => {
     fetch(`https://api.themoviedb.org/3/search/movie?api_key=${ENV.TMDB_API_KEY}&query=${search}&page=1&include_adult=false`)
-    .then(res => res.json())
-    .then(data => {
-      setMovies(data.results);
-      let titles = [];
-      let thumbnails = [];
-      for (let i = 0; i < data.results.length; i++) {
-        titles.push(data.results[i].title);
-        thumbnails.push(`https://image.tmdb.org/t/p/w500${data.results[i].poster_path}`)
-      }
-      setTitles(titles);
-      setThumbnails(thumbnails);
+      .then(res => res.json())
+      .then(data => {
+        setMovies(data.results);
+        let titles = [];
+        let thumbnails = [];
+        for (let i = 0; i < data.results.length; i++) {
+          titles.push(data.results[i].title);
+          thumbnails.push(`https://image.tmdb.org/t/p/w500${data.results[i].poster_path}`)
+        }
+        setTitles(titles);
+        setThumbnails(thumbnails);
       })
       .catch(err => console.log(err));
+
+      Keyboard.dismiss();
   }
 
   return (
@@ -44,17 +46,19 @@ export default function Search() {
           <Image style={styles.logo} source={require("../../assets/images/long.png")} />
           <Text style={styles.titleText}>Search</Text>
         </View>
+        
         <SearchContainer>
+          <TouchableOpacity onPress={searchMovies}>
+            <Ionicons name="search" size={30} color="black" />
+          </TouchableOpacity>
           <SearchInput
             placeholder="Search for a movie..."
             onChangeText={text => setSearch(text)}
             value={search}
             onSubmitEditing={searchMovies}
           />
-          {/* <TouchableOpacity onPress={searchMovies}> /!\ Commented this because it crashes when clicked, idk why so you have to press enter to validate
-            <Ionicons name="search" size={30} color="black" />
-          </TouchableOpacity> */}
         </SearchContainer>
+       
         <ScrollView style={styles.scrollContainer}>
           {movies.map((movie, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Movie', { movie: movie, thumbnail: thumbnails[index] })}>
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-		marginTop: 20,
+    marginTop: 20,
     marginBottom: 5,
     resizeMode: "contain",
     height: 20,
@@ -108,7 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0d253f",
     alignItems: "center",
     shadowColor: "#01b4e4",
-    shadowOffset: {width: 2, height: 2},
+    shadowOffset: { width: 2, height: 2 },
     shadowRadius: 5,
     shadowOpacity: .25,
   },
@@ -143,5 +147,9 @@ const styles = StyleSheet.create({
     height: 600,
     resizeMode: "cover",
   },
+
+  iconStyle: {
+
+  }
 
 });
