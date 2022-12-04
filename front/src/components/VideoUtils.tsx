@@ -25,7 +25,7 @@ const VideoAuthor = styled.Text`
 `;
 
 const VideoDescription = styled.Text`
-	font-size: 12px;
+	font-size: 15px;
 	color: #999;
 	margin: 10px 10px;
 `;

@@ -41,9 +41,6 @@ export default function TabsScreen({ navigation }) {
             backgroundColor: "#0d253f",
 
           },
-
-          
-
         
         })
       }

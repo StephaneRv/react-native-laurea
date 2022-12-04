@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native'
 
-import { VideoThumbnail, VideoTitle } from "../components/VideoUtils";
+import { VideoTitle } from "../components/VideoUtils";
 
-// import YOUTUBE_API_KEY from "../../env";
 import ENV from "../../env";
 
 export default function Search() {
@@ -27,6 +26,7 @@ export default function Search() {
         setMovies(data.results);
         let titles = [];
         let thumbnails = [];
+
         for (let i = 0; i < data.results.length; i++) {
           titles.push(data.results[i].title);
           thumbnails.push(`https://image.tmdb.org/t/p/w500${data.results[i].poster_path}`)
@@ -53,6 +53,7 @@ export default function Search() {
           </TouchableOpacity>
           <SearchInput
             placeholder="Search for a movie..."
+            placeholderTextColor="grey"
             onChangeText={text => setSearch(text)}
             value={search}
             onSubmitEditing={searchMovies}
@@ -63,7 +64,7 @@ export default function Search() {
           {movies.map((movie, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Movie', { movie: movie, thumbnail: thumbnails[index] })}>
               <Image key={index} style={styles.thumbnail} source={{ uri: thumbnails[index] ? thumbnails[index] : null }} />
-              <VideoTitle>{titles[index]}</VideoTitle>
+              <VideoTitle style={colorScheme == 'light' ? styles.movieTitle_light : styles.movieTitle_dark}>{titles[index]}</VideoTitle>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -125,16 +126,21 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
   },
 
-  text_light: {
-    marginBottom: 20,
-    color: '#000',
+  movieTitle_light: {
+    fontFamily: "Helvetica",
+    fontWeight: "bold",
+    fontSize: 20,
+    paddingBottom: 15,
     textAlign: "center",
   },
 
-  text_dark: {
-    marginBottom: 20,
-    color: "#fff",
+  movieTitle_dark: {
+    fontFamily: "Helvetica",
+    fontWeight: "bold",
+    fontSize: 20,
+    paddingBottom: 15,
     textAlign: "center",
+    color: "#fff",
   },
 
   scrollContainer: {
@@ -143,13 +149,11 @@ const styles = StyleSheet.create({
   },
 
   thumbnail: {
-    width: "100%",
-    height: 600,
-    resizeMode: "cover",
+    width: "75%",
+    height: 250,
+    resizeMode: "contain",
+    alignSelf: "center",
+    
   },
-
-  iconStyle: {
-
-  }
 
 });

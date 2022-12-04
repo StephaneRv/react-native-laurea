@@ -2,16 +2,15 @@
 The MovieDB App is made for the Introduction to Mobile Application Development course at Laurea University of Applied Sciences, and is brought to you by:
 
 - Joel Isotalo
-- Thomas Meurice
 - Igor Rautiainen
-- Stéphane Riveaux
+- Stephané Riveaux
 - Kimberly Ruohio
 
 ## App Features
-The MovieDB allows the user to browse trending movies, as well as search for films, TV shows, and cast and crew, with the ability to tap through for more information on each result. The information supplied depends on what’s in TMDB. The user can register, login and logout, reset the password, and send a request for a new password. The application also offers account information and an about screen for more information. 
+The MovieDB allows the user to browse trending movies, as well as search for films, and TV shows, with the ability to tap through for more information on each result. The information supplied depends on what’s in TMDB. The user can register, login and logout, reset the password, though sending a request for a new password is not yet implemented. The application also offers account information and an about screen for more information. 
 
 ### Under the Hood
-The MovieDB app is made with React Native and NodeJS, built with Expo. It features a simple SQL database to demonstrate user login, with hashed passwords that would secure user data in a real-world scenario. The keyboard type should also change depending on the type of text entry, and can be dismissed by tapping outside the text area.
+The MovieDB app is made with React Native and NodeJS, built with Expo. It features a simple MySQL database to demonstrate user login, with hashed passwords that would secure user data in a real-world scenario. The keyboard type should also change depending on the type of text entry, and can be dismissed by tapping outside the text area throughout the application.
 
 ## Instructions
 If you want to try this app by yourself, you'll need to follow these steps. The following assumes you have both Node and Expo installed already, but if you don’t, then follow the directions found at the following links:
@@ -20,6 +19,13 @@ If you want to try this app by yourself, you'll need to follow these steps. The 
  - <https://docs.expo.dev/get-started/installation/>
  - Expo Go can be found in the App Store or Google Play.
  - If running MacOS, having Homebrew or Yarn can make life easier.
+
+### TMDB API Key
+You’ll also need you’re own API key to use TMDB’s website. Without it, the app will not be able to work properly. As it’s not best practice to share keys, we ask that you go generate your own for free over at <https://www.themoviedb.org>. 
+
+- After creating your free account, go to your account settings and request a personal or student API. If you need a website, simply use our Github address, <https://github.com/StephaneRv/react-native-laurea>. 
+
+- The API key should be generated automatically, and will be copied later in the instructions below.
 
 ==The instructions may look daunting, but it takes longer to read than to do!==
 
@@ -37,8 +43,8 @@ The `/back/.env` file should look like the following:
 	
 ```
 DB_HOST = localhost
-DB_USER = newuser //Your db's username. It's recommended to create one, instead of using root.
-DB_PASSWORD = password1 //Your DB's password
+DB_USER = newuser
+DB_PASSWORD = password1
 DB_DATABASE = userDB
 DB_PORT = 3306
 PORT = 3000
@@ -49,8 +55,7 @@ PORT = 3000
 It should look like this, if creating from scratch. If it already exists, just make sure the `.env` is there:
 	
 ```
-.gitignore
-	# Env
+# Env
 	.env
 ```
 
@@ -58,22 +63,32 @@ It should look like this, if creating from scratch. If it already exists, just m
 - If you have difficulties setting-up the back end, you can follow this tutorial: <https://medium.com/@prashantramnyc/a-simple-registration-and-login-backend-using-nodejs-and-mysql-967811509a64> that explains all the steps to create the same back-end. There’s no need to read the entire page, just the part up to running the database, but it does have some troubleshooting tips if needed.
 
 ### Setting up the Frontend
-- In order to run the app inside Expo Go, your mobile device needs to know how to find your computer. Open up `front/src/screens/Login.tsx`, and find the comment `//Add your computer's internal IPv4 address here`. 
+1. In order for the app to run, there’s data unique to you that it needs:
 
-- This address needs to be your computer’s address. If you’re using an internal (NAT) IP, then open your router’s settings page and find your computer. If you have an external IP, then simply open Google and ask “What is my IP?”
+	- Expo Go, the application on your mobile device that will run the app, needs to be able to find your computer on the network. If you’re using an internal (NAT) IP, then open your router’s settings page and find your computer. If you have an external IP, then simply open Google and ask “What is my IP?”
 
-- Open front/src/screens/Register.tsx, and repeat.
+	- The API key you generated over TMDB, to get data from their website.
 
-They should now look like the following:
+2. Create a new file in the `/front` folder called `env.js`. This is where the app looks for your IP address for Expo to work, and TMDB’s API for that to work.
+
+The `env.js` file should look like this:
+
+```
+const BACKEND_URL = "http://your.numeric.address:3000";
+
+const TMDB_API_KEY = "your_api_key";
+
+export default {BACKEND_URL, TMDB_API_KEY};
+```
+
+2. Add it to your `.gitignore` file (create that file in the root folder if it doesn’t already exist). This is so you don’t potentially share your own key and personal IP with the rest of the internet.
+
+It should look like this, if creating from scratch. If it already exists, just make sure the `env.js` is there:
 	
-`Login.tsx`:
-
-`axios.post("http://your.numeric.address:3000/login",` 
-
-`Register.tsx:`
-
-`axios.post("http://your.numeric.address:3000/register",`
-
+```
+#env
+	env.js
+```
 
 #### Note!
 The port you’re using for the backend server might be different. The default is generally port 3000. Adjust the `back/.env` accordingly, more on that below.
@@ -87,7 +102,7 @@ To run the back and the front for a fully-functioning app (as the app is not doc
 
 3. Use your second terminal to go to the back folder, run `npm i` as well and type `node dbServer.js`  or `nodemon dbServer` to start the server. Note the port the server’s running on, if it’s something other than 3000, adjust the addresses while setting up the Frontend, and the .env setup in the Backend accordingly. 
 
-4. Scan the QR code in the terminal with your mobile device to launch Expo Go. The application will build itself and launch. (Alternatively you should be able to launch Expo Go, and find the application ready and waiting for launch. You may have to create a free account.)
+4. Scan the QR code in the terminal with your mobile device to launch Expo Go. The application will build itself and launch. (Alternatively you should be able to launch Expo Go, and find the application ready and waiting for launch. You may have to create a free account.) It takes a few seconds to build the app.
 
 5. When you’re done with the application, you can stop the terminal processes with a ctrl-c in each terminal window. Remember to stop the MySQL Server when you’re not using it.
 

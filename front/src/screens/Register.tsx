@@ -33,7 +33,6 @@ export default function RegisterScreen({ navigation }) {
       return;
     }
 
-     //Add your computer's internal IPv4 address here
     axios.post(`${ENV.BACKEND_URL}/register`, {
       user: username,
       password: password

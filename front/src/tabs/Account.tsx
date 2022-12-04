@@ -20,8 +20,6 @@ import ENV from "../../env";
 
 const colorScheme = Appearance.getColorScheme();
 
-//I can't get navigation going on this page.
-
 export default function Account({ navigation }) {
   const [tmp, setTmp] = useState(async () => {
     let usr = await AsyncStorage.getItem('@username')

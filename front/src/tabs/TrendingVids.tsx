@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, SafeAreaView, ScrollView, View, TouchableOpacity, Image, Appearance } from "react-native";
-import { VideoThumbnail, VideoTitle } from "../components/VideoUtils";
+import { VideoTitle } from "../components/VideoUtils";
 import { useNavigation } from '@react-navigation/native'
 
 import ENV from "../../env";
@@ -46,7 +46,7 @@ export default function TrendingVideos() {
           {movies.map((movie, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Movie', { movie: movie, thumbnail: thumbnails[index] })}>
               <Image key={index} style={styles.thumbnail} source={{ uri: thumbnails[index] ? thumbnails[index] : null }} />
-              <VideoTitle>{titles[index]}</VideoTitle>
+              <VideoTitle style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>{titles[index]}</VideoTitle>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
 
   thumbnail: {
     width: "100%",
-    height: 600,
-    resizeMode: "cover",
+    height: 400,
+    resizeMode: "contain",
+    alignSelf: "center",
   },
 });
