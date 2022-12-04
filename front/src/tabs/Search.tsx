@@ -63,7 +63,9 @@ export default function Search() {
         <ScrollView style={styles.scrollContainer}>
           {movies.map((movie, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Movie', { movie: movie, thumbnail: thumbnails[index] })}>
+              <View style={styles.imageContainer}>
               <Image key={index} style={styles.thumbnail} source={{ uri: thumbnails[index] ? thumbnails[index] : null }} />
+              </View>
               <VideoTitle style={colorScheme == 'light' ? styles.movieTitle_light : styles.movieTitle_dark}>{titles[index]}</VideoTitle>
             </TouchableOpacity>
           ))}
@@ -80,6 +82,7 @@ const SearchContainer = styled.View`
   padding: 0 8px;
   margin: 10px 20px;
   border-radius: 30px;
+  border: solid 1px;
 `;
 
 const SearchInput = styled.TextInput`
@@ -131,6 +134,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     paddingBottom: 15,
+    marginTop: 20,
     textAlign: "center",
   },
 
@@ -139,8 +143,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     paddingBottom: 15,
+    marginTop: 20,
     textAlign: "center",
     color: "#fff",
+  },
+
+  imageContainer: {
+    shadowColor: "#01b4e4",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 20,
+    shadowOpacity: .74,
   },
 
   scrollContainer: {
@@ -150,7 +162,7 @@ const styles = StyleSheet.create({
 
   thumbnail: {
     width: "75%",
-    height: 250,
+    height: 400,
     resizeMode: "contain",
     alignSelf: "center",
     

@@ -45,7 +45,9 @@ export default function TrendingVideos() {
         <ScrollView style={styles.scrollContainer}>
           {movies.map((movie, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Movie', { movie: movie, thumbnail: thumbnails[index] })}>
-              <Image key={index} style={styles.thumbnail} source={{ uri: thumbnails[index] ? thumbnails[index] : null }} />
+              <View style={styles.imageContainer}>
+                <Image key={index} style={styles.thumbnail} source={{ uri: thumbnails[index] ? thumbnails[index] : null }} />
+              </View>
               <VideoTitle style={colorScheme == 'light' ? styles.text_light : styles.text_dark}>{titles[index]}</VideoTitle>
             </TouchableOpacity>
           ))}
@@ -87,6 +89,13 @@ const styles = StyleSheet.create({
     shadowOpacity: .25,
   },
 
+  imageContainer: {
+    shadowColor: "#01b4e4",
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 20,
+    shadowOpacity: .74,
+  },
+
   titleText: {
     fontFamily: "Helvetica",
     fontWeight: "bold",
@@ -97,12 +106,14 @@ const styles = StyleSheet.create({
 
   text_light: {
     marginBottom: 20,
+    marginTop: 30,
     color: '#000',
     textAlign: "center",
   },
 
   text_dark: {
     marginBottom: 20,
+    marginTop: 30,
     color: "#fff",
     textAlign: "center",
   },

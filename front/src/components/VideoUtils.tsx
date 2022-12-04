@@ -11,6 +11,7 @@ const VideoTitle = styled.Text`
   font-weight: bold;
   margin: 10px 10px;
   padding-bottom: 10px;
+  text-align: center;
 `;
 
 const VideoChannel = styled.Text`

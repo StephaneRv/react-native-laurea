@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Appearance, SafeAreaView, ScrollView, StyleSheet, Text } from "react-native";
+import { Image, Appearance, SafeAreaView, ScrollView, StyleSheet, Text, Linking } from "react-native";
 import { VideoTitle, VideoDescription, } from "./VideoUtils";
 
 const colorScheme = Appearance.getColorScheme();
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
 
 	  },
     
-
     movieTitle_light: {
       fontFamily: "Helvetica",
       fontWeight: "bold",
@@ -76,5 +75,14 @@ const styles = StyleSheet.create({
       resizeMode: "contain",
       marginBottom: 10,
       borderRadius: 10,
+      shadowColor: "#01b4e4",
+      shadowOffset: {width: 2, height: 2},
+      shadowRadius: 20,
+      shadowOpacity: .74,
+    },
+
+    image: {
+      width: 25,
+      resizeMode: "contain",
     },
 });

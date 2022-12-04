@@ -90,12 +90,6 @@ export default function Account({ navigation }) {
         style={styles.logo}
         source={require("../../assets/images/short.png")}
       />
-
-      {/* [16:58, 01/12/2022] Kimberly Ruohio: The account page, off the top of my head, should include a link to the about, like in your screenshot, ability to change email address and change password, which would borrow elements from @Stephane's original code for registering, and he's not implemented changing password just yet.
-Worry less about implementing it, more putting the inputs there. If you want to do it in more than one page, like refer back to the change password screen, Or maybe just nothing works there, and it's just the inputs and general look of it.
-[16:58, 01/12/2022] Kimberly Ruohio: But of course the ability to logout.
-[16:59, 01/12/2022] Kimberly Ruohio: Even if it's not really logging out just yet. */}
-
       <Text
         style={colorScheme == "light" ? styles.text_light : styles.text_dark}
       >
@@ -180,7 +174,7 @@ Worry less about implementing it, more putting the inputs there. If you want to 
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.textStyle}>About</Text>
+          <Text style={colorScheme == 'light' ? styles.textStyle : styles.textStyle_dark}>About</Text>
         </Pressable>
       </View>
 
@@ -218,7 +212,7 @@ Worry less about implementing it, more putting the inputs there. If you want to 
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                <Text style={styles.textStyle}>OK</Text>
+                <Text style={styles.textStyle_dark}>OK</Text>
               </Pressable>
             </View>
           </View>
@@ -342,11 +336,19 @@ const styles = StyleSheet.create({
     shadowRadius: 25,
     shadowOpacity: 0.5,
   },
+
   textStyle: {
+    color: "#0d253",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+
+  textStyle_dark: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
+
   textStyleSignOut: {
     color: "red",
     fontWeight: "bold",
