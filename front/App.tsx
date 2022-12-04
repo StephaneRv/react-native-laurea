@@ -25,7 +25,7 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
-        await new Promise(resolve => setTimeout(resolve, 0));
+        await new Promise(resolve => setTimeout(resolve, 5));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -50,7 +50,7 @@ export default function App() {
 
   return (
     <>
-      <NavigationContainer >  
+      <NavigationContainer >
         <Stack.Navigator 
           screenOptions={colorScheme == 'dark' ? 
             {headerStyle: {
@@ -72,8 +72,7 @@ export default function App() {
           <Stack.Screen name ="Movie" component={VideoViewer} options={{title: ""}}/>
 
         </Stack.Navigator>
-        <View onLayout={onLayoutRootView} >
-        </View>
+        <View onLayout={onLayoutRootView} />
       </NavigationContainer>
     </>
   );

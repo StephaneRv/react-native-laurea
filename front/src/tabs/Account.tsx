@@ -15,6 +15,9 @@ import {
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import axios from "axios";
+import ENV from "../../env";
+
 const colorScheme = Appearance.getColorScheme();
 
 //I can't get navigation going on this page.
@@ -32,16 +35,55 @@ export default function Account({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const SignOutUser = async () => {
-    // Sign Out Function here!
+      navigation.replace('Login')
   };
 
   const SetNewUsername = async () => {
-    // Check validity, if ok - update username in db!
+    if (!newUsername) {
+      Alert.alert("Please fill in all fields");
+      return;
+    }
+    if (newUsername === username) {
+      Alert.alert("New username is the same as old username");
+      return;
+    }
+    axios.put(`${ENV.BACKEND_URL}/changeUsername`, {
+      username: username,
+      newUsername: newUsername,
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        Alert.alert("Username changed successfully");
+        setUsername(newUsername);
+      } else {
+        Alert.alert("Username change failed");
+      }
+    });
   };
 
-  const ChangePassword = async () => {
-    // Check validity, if ok - set new password in DB
+  const SetNewPassword = async () => {
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      Alert.alert("Please fill in all fields");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      Alert.alert("Passwords do not match");
+      return;
+    }
+    axios.put(`${ENV.BACKEND_URL}/changePassword`, {
+      username: username,
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        Alert.alert("Password changed successfully");
+      } else {
+        Alert.alert("Password change failed");
+      }
+    });
   };
+
   return (
     <View
       style={colorScheme == "light" ? styles.container : styles.container_dark}
@@ -115,7 +157,7 @@ Worry less about implementing it, more putting the inputs there. If you want to 
 
         <TouchableOpacity
           style={styles.loginBtn}
-          onPress={() => ChangePassword()}
+          onPress={() => SetNewPassword()}
         >
           <Text style={styles.loginText}>Change password</Text>
         </TouchableOpacity>
