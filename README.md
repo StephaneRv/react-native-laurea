@@ -9,14 +9,14 @@ The MovieDB App is made for the Introduction to Mobile Application Development c
 ## App Features
 The MovieDB allows the user to browse trending movies, as well as search for films, and TV shows, with the ability to tap through for more information on each result.
 
-![Picture of the trends page in the app](https://imgur.com/4icb0cb)
-![Picture of the search tab](https://imgur.com/xu6GvFi)
+![Picture of the trends page in the app](https://i.imgur.com/4icb0cb.png)
+![Picture of the search tab](https://i.imgur.com/xu6GvFi.png)
 
 
 The information supplied depends on what’s in TMDB. The user can register, login and logout, reset the password, though sending a request for a new password is not yet implemented. The application also offers account information and an about screen for more information. 
 
-![Picture of the account tab](https://imgur.com/a/ErMQAxO)
-![Picture of the splash screen when the app is first launched or when an user has logged out](https://imgur.com/a/TOHYp9k)
+![Picture of the account tab](https://i.imgur.com/zJEDZd7.png)
+![Picture of the splash screen when the app is first launched or when an user has logged out](https://i.imgur.com/NVYAAL5.png)
 
 ### Under the Hood
 The MovieDB app is made with React Native and NodeJS, built with Expo. It features a simple MySQL database to demonstrate user login, with hashed passwords that would secure user data in a real-world scenario. The keyboard type should also change depending on the type of text entry, and can be dismissed by tapping outside the text area throughout the application.
@@ -74,7 +74,7 @@ It should look like this, if creating from scratch. If it already exists, just m
 	.env
 ```
 
-![Picture of the .env and .gitignore files in the /back folder](https://i.imgur.com/TmVf1cS.png)
+![Picture of the .env and .gitignore files in the /back folder](https://i.imgur.com/0JDojLZ.png)
 
 
 #### Note! 
@@ -108,7 +108,7 @@ It should look like this, if creating from scratch. If it already exists, just m
 	env.js
 ```
 
-![Picture of the env.js and .gitignore files in the /front folder](https://i.imgur.com/elI8gi4.png)
+![Picture of the env.js and .gitignore files in the /front folder](https://i.imgur.com/BWGLVIR.png)
 
 #### Note!
 The port you’re using for the backend server might be different. The default is generally port 3000. Adjust the `back/.env` accordingly, more on that below.
