@@ -48,7 +48,9 @@ If you need a website, simply use our Github address, <https://github.com/Stepha
 	- Install MySQL Server: <https://dev.mysql.com/downloads/installer/>
 	- Install MySQL Workbench: <https://dev.mysql.com/downloads/workbench/>
 
-2. Once your MySQL server is running, open MySQL Workbench, and run the schema found in the /database folder. This will create our userDB. You can close Workbench now if you wish, but it’s recommended to setup your userDB username and password here. (See the note at the end of this section for a tutorial that can help with that.)
+![Picture of MySQL installer with both Workbench and Server selected and successfully installed](https://i.imgur.com/m0txZtZ.png)
+
+2. Once your MySQL server is running, open MySQL Workbench, and run the schema found in the /database folder. This will create our userDB. ![Picture of the schema script in MySQL Workbench](https://i.imgur.com/49t1hXZ.png) You can close Workbench now if you wish, but it’s recommended to setup your userDB username and password here. (See the note at the end of this section for a tutorial that can help with that.)
 
 3. Create a `.env` file in the /back folder that will contain these environment variables `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_DATABASE`, and `DB_PORT`. These variables will be used to store the values that you set-up when you installed your database.
 
@@ -72,13 +74,16 @@ It should look like this, if creating from scratch. If it already exists, just m
 	.env
 ```
 
+![Picture of the .env and .gitignore files in the /back folder](https://i.imgur.com/TmVf1cS.png)
+
+
 #### Note! 
 - If you have difficulties setting-up the back end, you can follow this tutorial: <https://medium.com/@prashantramnyc/a-simple-registration-and-login-backend-using-nodejs-and-mysql-967811509a64> that explains all the steps to create the same back-end. There’s no need to read the entire page, just the part up to running the database, but it does have some troubleshooting tips if needed.
 
 ### Setting up the Frontend
 1. In order for the app to run, there’s data unique to you that it needs:
 
-	- Expo Go, the application on your mobile device that will run the app, needs to be able to find your computer on the network. If you’re using an internal (NAT) IP, then open your router’s settings page and find your computer. If you have an external IP, then simply open Google and ask “What is my IP?”
+	- Expo Go, the application on your mobile device that will run the app, needs to be able to find your computer on the network. If you’re using an internal (NAT) IP, then open your router’s settings page and find your computer. ![Picture of ipconfig screen in Windows Command Prompt](https://i.imgur.com/hvdPGbx.png)If you have an external IP, then simply open Google and ask “What is my IP?”
 
 	- The API key you generated over TMDB, to get data from their website.
 
@@ -103,6 +108,8 @@ It should look like this, if creating from scratch. If it already exists, just m
 	env.js
 ```
 
+![Picture of the env.js and .gitignore files in the /front folder](https://i.imgur.com/elI8gi4.png)
+
 #### Note!
 The port you’re using for the backend server might be different. The default is generally port 3000. Adjust the `back/.env` accordingly, more on that below.
 
@@ -111,9 +118,10 @@ To run the back and the front for a fully-functioning app (as the app is not doc
 
 1. Open two terminals.
 
-2. With the first terminal, go to the front folder, run `npm i`, and then `npx expo start`.
+2. With the first terminal, go to the front folder, run `npm i`, and then `npx expo start`. ![Picture of the CMD terminal with the directory changed to the /front folder](https://i.imgur.com/2NaREOn.png) ![Picture of the CMD terminal after the command 'npx expo start' is executed](https://i.imgur.com/SaLtAF7.png) 
 
-3. Use your second terminal to go to the back folder, run `npm i` as well and type `node dbServer.js`  or `nodemon dbServer` to start the server. Note the port the server’s running on, if it’s something other than 3000, adjust the addresses while setting up the Frontend, and the .env setup in the Backend accordingly. 
+
+3. Use your second terminal to go to the back folder, run `npm i` as well and type `node dbServer.js`  or `nodemon dbServer` to start the server. ![Picture of the second CMD terminal with the directory changed to the /back folder and dbServer.js running successfully](https://i.imgur.com/p795q35.png) Note the port the server’s running on, if it’s something other than 3000, adjust the addresses while setting up the Frontend, and the .env setup in the Backend accordingly. 
 
 4. Scan the QR code in the terminal with your mobile device to launch Expo Go. The application will build itself and launch. (Alternatively you should be able to launch Expo Go, and find the application ready and waiting for launch. You may have to create a free account.) It takes a few seconds to build the app.
 
