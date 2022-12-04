@@ -23,7 +23,12 @@ If you want to try this app by yourself, you'll need to follow these steps. The 
 ### TMDB API Key
 You’ll also need you’re own API key to use TMDB’s website. Without it, the app will not be able to work properly. As it’s not best practice to share keys, we ask that you go generate your own for free over at <https://www.themoviedb.org>. 
 
-- After creating your free account, go to your account settings and request a personal or student API. If you need a website, simply use our Github address, <https://github.com/StephaneRv/react-native-laurea>. 
+- After creating your free account, go to your account settings and request a personal or student API. 
+
+![alt text](https://i.imgur.com/DuQ2jw7.png)
+
+
+If you need a website, simply use our Github address, <https://github.com/StephaneRv/react-native-laurea>. 
 
 - The API key should be generated automatically, and will be copied later in the instructions below.
 
