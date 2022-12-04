@@ -7,7 +7,16 @@ The MovieDB App is made for the Introduction to Mobile Application Development c
 - Kimberly Ruohio
 
 ## App Features
-The MovieDB allows the user to browse trending movies, as well as search for films, and TV shows, with the ability to tap through for more information on each result. The information supplied depends on what’s in TMDB. The user can register, login and logout, reset the password, though sending a request for a new password is not yet implemented. The application also offers account information and an about screen for more information. 
+The MovieDB allows the user to browse trending movies, as well as search for films, and TV shows, with the ability to tap through for more information on each result.
+
+![Picture of the trends page in the app](https://i.imgur.com/sHop9wF.png)
+![Picture of the search tab with the search query 'Minions'](https://i.imgur.com/kezL38c.png)
+
+
+The information supplied depends on what’s in TMDB. The user can register, login and logout, reset the password, though sending a request for a new password is not yet implemented. The application also offers account information and an about screen for more information. 
+
+![Picture of the account tab](https://i.imgur.com/OcGfhrU.png)
+![Picture of the splash screen when the app is first launched or when an user has logged out](https://i.imgur.com/xQdKV6g.png)
 
 ### Under the Hood
 The MovieDB app is made with React Native and NodeJS, built with Expo. It features a simple MySQL database to demonstrate user login, with hashed passwords that would secure user data in a real-world scenario. The keyboard type should also change depending on the type of text entry, and can be dismissed by tapping outside the text area throughout the application.
@@ -23,7 +32,11 @@ If you want to try this app by yourself, you'll need to follow these steps. The 
 ### TMDB API Key
 You’ll also need you’re own API key to use TMDB’s website. Without it, the app will not be able to work properly. As it’s not best practice to share keys, we ask that you go generate your own for free over at <https://www.themoviedb.org>. 
 
-- After creating your free account, go to your account settings and request a personal or student API. If you need a website, simply use our Github address, <https://github.com/StephaneRv/react-native-laurea>. 
+- After creating your free account, go to your account settings and request a personal or student API. 
+
+![Picture of TheMovieDB settings page showcasing where the personal API key can be found](https://i.imgur.com/DuQ2jw7.png)
+
+If you need a website, simply use our Github address, <https://github.com/StephaneRv/react-native-laurea>. 
 
 - The API key should be generated automatically, and will be copied later in the instructions below.
 
