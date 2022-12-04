@@ -74,7 +74,7 @@ It should look like this, if creating from scratch. If it already exists, just m
 	.env
 ```
 
-![Picture of the .env and .gitignore files in the /back folder](https://i.imgur.com/TmVf1cS.png)
+![Picture of the .env and .gitignore files in the /back folder](https://i.imgur.com/0JDojLZ.png)
 
 
 #### Note! 
@@ -108,7 +108,7 @@ It should look like this, if creating from scratch. If it already exists, just m
 	env.js
 ```
 
-![Picture of the env.js and .gitignore files in the /front folder](https://i.imgur.com/elI8gi4.png)
+![Picture of the env.js and .gitignore files in the /front folder](https://i.imgur.com/BWGLVIR.png)
 
 #### Note!
 The port you’re using for the backend server might be different. The default is generally port 3000. Adjust the `back/.env` accordingly, more on that below.
