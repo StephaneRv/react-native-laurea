@@ -3,7 +3,7 @@ The MovieDB App is made for the Introduction to Mobile Application Development c
 
 - Joel Isotalo
 - Igor Rautiainen
-- Stephané Riveaux
+- Stéphane Riveaux
 - Kimberly Ruohio
 
 ## App Features
